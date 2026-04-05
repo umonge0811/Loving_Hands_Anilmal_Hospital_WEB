@@ -1,6 +1,6 @@
 ---
-import { useTranslations } from '@/i18n/utils';
-import type { Lang } from '@/i18n/utils';
+import { useTranslations } from "@/i18n/utils";
+import type { Lang } from "@/i18n/utils";
 
 interface Props {
   lang: Lang;
@@ -14,8 +14,7 @@ const year = new Date().getFullYear();
 <footer class="bg-primary text-white">
   <!-- Main Footer Content -->
   <div class="container mx-auto px-4 max-w-6xl py-12">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
       <!-- Brand Column -->
       <div class="flex flex-col gap-4">
         <div class="flex items-center gap-3">
@@ -28,11 +27,13 @@ const year = new Date().getFullYear();
           />
           <div>
             <p class="font-heading font-bold leading-tight">Loving Hands</p>
-            <p class="text-xs tracking-widest uppercase text-white/70">Animal Hospital</p>
+            <p class="text-xs tracking-widest uppercase text-white/70">
+              Animal Hospital
+            </p>
           </div>
         </div>
         <p class="text-sm text-white/80 leading-relaxed">
-          {t('footer.tagline')}
+          {t("footer.tagline")}
         </p>
         <!-- Social Links -->
         <a
@@ -42,49 +43,138 @@ const year = new Date().getFullYear();
           class="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
           aria-label="Facebook"
         >
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+          <svg
+            class="w-4 h-4"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+            ></path>
           </svg>
-          {t('footer.social.facebook')}
+          {t("footer.social.facebook")}
         </a>
+      </div>
+
+      <!-- Services Column -->
+      <div class="flex flex-col gap-3">
+        <h3 class="font-heading font-semibold text-lg">
+          {t("footer.services.title")}
+        </h3>
+        <ul class="flex flex-col gap-2">
+          {
+            [
+              "Acupuncture",
+              "Chiropractic Care",
+              "Dental Care",
+              "Emergency Care",
+              "Microchipping",
+              "Rehabilitation",
+              "Spay & Neuter",
+              "Vaccinations",
+              "Wellness Exam",
+            ].map((service) => (
+              <li class="flex items-center gap-2 text-sm text-white/80">
+                <span class="text-secondary" aria-hidden="true">
+                  ✓
+                </span>
+                {service}
+              </li>
+            ))
+          }
+        </ul>
       </div>
 
       <!-- Contact Column -->
       <div class="flex flex-col gap-3">
-        <h3 class="font-heading font-semibold text-lg">{t('contact.title')}</h3>
+        <h3 class="font-heading font-semibold text-lg">{t("contact.title")}</h3>
         <address class="not-italic flex flex-col gap-2 text-sm text-white/80">
-          <p>{t('contact.address.value')}</p>
+          <p>{t("contact.address.value")}</p>
           <a href="tel:9095912273" class="hover:text-white transition-colors">
-            {t('contact.phone.value')}
+            {t("contact.phone.value")}
           </a>
           <a href="sms:9092707277" class="hover:text-white transition-colors">
-            {t('contact.text.label')}: {t('contact.text.value')}
+            {t("contact.text.label")}: {t("contact.text.value")}
           </a>
-          <a href="mailto:lovinghandsanimalhospital@gmail.com" class="hover:text-white transition-colors break-all">
-            {t('contact.email.value')}
+          <a
+            href="mailto:lovinghandsanimalhospital@gmail.com"
+            class="hover:text-white transition-colors break-all"
+          >
+            {t("contact.email.value")}
           </a>
         </address>
       </div>
 
       <!-- Hours Column -->
       <div class="flex flex-col gap-3">
-        <h3 class="font-heading font-semibold text-lg">{t('contact.hours.label')}</h3>
-        <p class="text-sm text-white/80">{t('contact.hours.value')}</p>
-        <div class="mt-2">
-          <a href="tel:9095912273" class="btn-outline border-white text-white hover:bg-white hover:text-primary text-xs px-4 py-2">
-            {t('nav.book')}
-          </a>
+        <h3 class="font-heading font-semibold text-lg">
+          {t("footer.hours.title")}
+        </h3>
+        <div class="bg-white/10 rounded-xl p-4 flex flex-col gap-2">
+          <div class="flex justify-between text-sm">
+            <span class="text-white/70">Monday – Sunday</span>
+            <span class="font-bold text-white">9:00 AM – 9:00 PM</span>
+          </div>
+          <div class="border-t border-white/20 pt-2 mt-1">
+            <span class="text-xs text-secondary font-semibold">
+              ✓ Emergencies welcome / walk-ins
+            </span>
+          </div>
         </div>
+        <a
+          href="tel:9095912273"
+          class="btn-outline border-white text-white hover:bg-white hover:text-primary text-xs px-4 py-2 text-center"
+        >
+          {t("nav.book")}
+        </a>
+      </div>
+
+      <!-- Developed by Column -->
+      <div class="flex flex-col items-center gap-3">
+        <h3 class="font-heading font-semibold text-lg text-white/70">
+          {t("footer.developed_by")}
+        </h3>
+        <a
+          href="https://www.ticodevcr.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group"
+          aria-label="TicoDev CR"
+        >
+          <div
+            class="bg-white rounded-xl p-3 shadow-md transition-transform duration-300 group-hover:scale-105"
+          >
+            <img
+              src="/images/ticodevcr-logo.png"
+              alt="TicoDev CR - Web Development"
+              class="w-24 h-auto"
+              width="96"
+              height="96"
+              loading="lazy"
+            />
+          </div>
+        </a>
+        <a
+          href="https://www.ticodevcr.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs text-white/60 hover:text-white transition-colors"
+        >
+          www.ticodevcr.com
+        </a>
       </div>
     </div>
   </div>
 
   <!-- Copyright Bar -->
-  <div class="border-t border-white/20">
-    <div class="container mx-auto px-4 max-w-6xl py-4">
-      <p class="text-xs text-white/60 text-center">
-        {t('footer.copyright', { year })}
-      </p>
-    </div>
+<div class="border-t border-white/20">
+  <div class="container mx-auto px-4 max-w-6xl py-4">
+    <p class="text-xs text-white/60 text-center">
+      {t("footer.copyright", { year })}
+    </p>
   </div>
+</div>
 </footer>
+
+

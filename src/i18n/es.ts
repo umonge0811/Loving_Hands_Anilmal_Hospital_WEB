@@ -39,7 +39,7 @@ export const es = {
   'team.dr_sanchez.specialties': 'Medicina Exótica · Acupuntura · Medicina Felina · Cuidados Críticos · Cirugía · Odontología',
 
   // ─── Why Choose Us ─────────────────────────────────────────────
-  'why.title': '¿Por Qué Elegir Loving Hands?',
+  'why.title': '¿Porqué Elegir Loving Hands?',
   'why.hours.title': 'Abiertos Todos los Días',
   'why.hours.description': 'De 9am a 9pm, los 365 días del año. Porque las mascotas no siguen horarios.',
   'why.holistic.title': 'Enfoque Holístico',
@@ -67,6 +67,10 @@ export const es = {
   'footer.tagline': 'Medicina de Alta Calidad · Atención Compasiva · Servicio al Cliente Superior',
   'footer.copyright': '© {year} Loving Hands Animal Hospital. Todos los derechos reservados.',
   'footer.social.facebook': 'Facebook',
+  'footer.developed_by': 'Desarrollado por',
+  'footer.services.title': 'Nuestros Servicios',
+  'footer.hours.title': 'Horario',
+
 
   // ─── SEO / Meta ────────────────────────────────────────────────
   'meta.home.title': 'Loving Hands Animal Hospital | Veterinaria en Chino, CA',

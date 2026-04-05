@@ -67,6 +67,9 @@ export const en = {
   'footer.tagline': 'High Quality Medicine · Compassionate Care · Superb Customer Service',
   'footer.copyright': '© {year} Loving Hands Animal Hospital. All rights reserved.',
   'footer.social.facebook': 'Facebook',
+  'footer.developed_by': 'Developed by',
+  'footer.services.title': 'Our Services',
+  'footer.hours.title': 'Hours',
 
   // ─── SEO / Meta ────────────────────────────────────────────────
   'meta.home.title': 'Loving Hands Animal Hospital | Veterinary Care in Chino, CA',
