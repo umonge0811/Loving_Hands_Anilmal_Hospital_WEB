@@ -12,6 +12,7 @@
  */
 import Navbar from '@/components/layout/Navbar.astro';
 import Footer from '@/components/layout/Footer.astro';
+import ScrollToTop from '@/components/ui/ScrollToTop.astro';
 import '@/styles/global.css';
 import type { Lang } from '@/i18n/utils';
 
@@ -69,5 +70,6 @@ const esUrl = Astro.url.href.includes('/es/') ? Astro.url.href : Astro.url.href.
     </main>
 
     <Footer lang={lang} />
+    <ScrollToTop />
   </body>
 </html>
