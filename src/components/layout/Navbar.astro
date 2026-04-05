@@ -11,7 +11,7 @@ const t = useTranslations(lang);
 const alternateLangUrl = getAlternateLangUrl(Astro.url, lang === 'en' ? 'es' : 'en');
 
 const navLinks = [
-  { key: 'nav.home' as const,     href: lang === 'en' ? '/' : '/es/' },
+{ key: 'nav.home' as const, href: lang === 'en' ? '/#home' : '/es/#home' },
   { key: 'nav.services' as const, href: lang === 'en' ? '/#services' : '/es/#services' },
   { key: 'nav.team' as const,     href: lang === 'en' ? '/#team' : '/es/#team' },
   { key: 'nav.contact' as const,  href: lang === 'en' ? '/#contact' : '/es/#contact' },
@@ -42,15 +42,20 @@ const navLinks = [
       <!-- Desktop Navigation -->
       <ul class="hidden md:flex items-center gap-6" role="list">
         {navLinks.map(({ key, href }) => (
-          <li>
-            <a
-              href={href}
-              class="text-sm font-medium text-gray-700 hover:text-primary transition-colors duration-200"
-            >
-              {t(key)}
-            </a>
-          </li>
-        ))}
+        <li>
+          <a
+            href={href}
+            data-navlink
+            class="relative text-sm font-medium text-gray-700 hover:text-primary transition-colors duration-200
+                   after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px]
+                   after:bg-primary after:transition-all after:duration-300
+                   [&.active]:text-primary [&.active]:after:w-full"
+          >
+            {t(key)}
+          </a>
+        </li>
+      ))}
+      
       </ul>
 
       <!-- Right side: Language switcher + CTA -->
@@ -116,4 +121,37 @@ const navLinks = [
     const isOpen = menu?.classList.toggle('hidden') === false;
     btn.setAttribute('aria-expanded', String(isOpen));
   });
+
+    // ─── Indicador activo por seccion ───────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('[data-navlink]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Quitar active de todos
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        // Agregar active al link que corresponde a la seccion visible
+        const activeLink = document.querySelector(
+          `[data-navlink][href*="#${entry.target.id}"]`
+        );
+        activeLink?.classList.add('active');
+      }
+    });
+  }, {
+    rootMargin: '-40% 0px -50% 0px' // activa cuando la seccion esta en el centro de la pantalla
+  });
+
+  sections.forEach(section => observer.observe(section));
+    // Activar Home por defecto si el scroll esta arriba
+    window.addEventListener('scroll', () => {
+    if (window.scrollY < 100) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      document.querySelector('[data-navlink][href*="#home"]')
+        ?.classList.add('active');
+    }
+  }, { passive: true });
+
+
 </script>
