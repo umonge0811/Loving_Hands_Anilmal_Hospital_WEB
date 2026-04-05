@@ -19,7 +19,7 @@ const year = new Date().getFullYear();
       <div class="flex flex-col gap-4">
         <div class="flex items-center gap-3">
           <img
-            src="/images/logo.png"
+            src="/images/logo_Loving_Hands.jpg"
             alt="Loving Hands Animal Hospital"
             class="h-10 w-auto brightness-0 invert"
             width="40"
@@ -32,7 +32,7 @@ const year = new Date().getFullYear();
             </p>
           </div>
         </div>
-        <p class="text-sm text-white/80 leading-relaxed">
+        <p class="text-sm text-white/80 leading-relaxed text-balance">
           {t("footer.tagline")}
         </p>
         <!-- Social Links -->
@@ -98,11 +98,13 @@ const year = new Date().getFullYear();
             {t("contact.text.label")}: {t("contact.text.value")}
           </a>
           <a
-            href="mailto:lovinghandsanimalhospital@gmail.com"
-            class="hover:text-white transition-colors break-all"
-          >
-            {t("contact.email.value")}
-          </a>
+  href="mailto:lovinghandsanimalhospital@gmail.com"
+  class="hover:text-white transition-colors text-xs"
+>
+  lovinghandsanimalhospital@gmail.com
+</a>
+
+          
         </address>
       </div>
 
@@ -112,10 +114,11 @@ const year = new Date().getFullYear();
           {t("footer.hours.title")}
         </h3>
         <div class="bg-white/10 rounded-xl p-4 flex flex-col gap-2">
-          <div class="flex justify-between text-sm">
+          <div class="flex flex-col text-sm gap-1">
             <span class="text-white/70">Monday – Sunday</span>
             <span class="font-bold text-white">9:00 AM – 9:00 PM</span>
           </div>
+          
           <div class="border-t border-white/20 pt-2 mt-1">
             <span class="text-xs text-secondary font-semibold">
               ✓ Emergencies welcome / walk-ins
