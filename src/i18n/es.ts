@@ -39,7 +39,7 @@ export const es = {
   'team.dr_sanchez.specialties': 'Medicina Exótica · Acupuntura · Medicina Felina · Cuidados Críticos · Cirugía · Odontología',
 
   // ─── Why Choose Us ─────────────────────────────────────────────
-  'why.title': '¿Porqué Elegir Loving Hands?',
+  'why.title': '¿Por qué Elegir Loving Hands?',
   'why.hours.title': 'Abiertos Todos los Días',
   'why.hours.description': 'De 9am a 9pm, los 365 días del año. Porque las mascotas no siguen horarios.',
   'why.holistic.title': 'Enfoque Holístico',
