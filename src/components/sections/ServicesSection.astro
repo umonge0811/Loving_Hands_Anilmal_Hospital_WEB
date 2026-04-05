@@ -1,0 +1,81 @@
+---
+import { useTranslations } from '@/i18n/utils';
+import type { Lang } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const services = [
+  {
+    key: 'emergency' as const,
+    icon: '🚨',
+    highlight: true, // Red pill badge for emphasis
+  },
+  {
+    key: 'wellness' as const,
+    icon: '💉',
+    highlight: false,
+  },
+  {
+    key: 'surgery' as const,
+    icon: '⚕️',
+    highlight: false,
+  },
+  {
+    key: 'holistic' as const,
+    icon: '🌿',
+    highlight: false,
+  },
+  {
+    key: 'dental' as const,
+    icon: '🦷',
+    highlight: false,
+  },
+  {
+    key: 'exotic' as const,
+    icon: '🦜',
+    highlight: false,
+  },
+] as const;
+---
+
+<section id="services" class="py-16 md:py-24 bg-white">
+  <div class="container mx-auto px-4 max-w-6xl">
+
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="section-title">{t('services.title')}</h2>
+      <p class="section-subtitle">{t('services.subtitle')}</p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map(({ key, icon, highlight }) => (
+        <div class={`relative rounded-2xl p-6 flex flex-col gap-3 transition-shadow hover:shadow-md
+          ${highlight ? 'bg-primary text-white' : 'bg-accent'}`}>
+
+          {highlight && (
+            <span class="absolute top-4 right-4 text-xs font-bold bg-white text-primary rounded-full px-2 py-0.5">
+              24/7
+            </span>
+          )}
+
+          <span class="text-3xl" aria-hidden="true">{icon}</span>
+
+          <h3 class={`font-heading font-bold text-lg ${highlight ? 'text-white' : 'text-primary'}`}>
+            {t(`services.${key}.title`)}
+          </h3>
+
+          <p class={`text-sm leading-relaxed ${highlight ? 'text-white/80' : 'text-muted'}`}>
+            {t(`services.${key}.description`)}
+          </p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

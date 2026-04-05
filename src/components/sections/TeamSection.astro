@@ -1,0 +1,50 @@
+---
+import { useTranslations } from '@/i18n/utils';
+import type { Lang } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="team" class="py-16 md:py-24 bg-accent">
+  <div class="container mx-auto px-4 max-w-6xl">
+
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="section-title">{t('team.title')}</h2>
+      <p class="section-subtitle">{t('team.subtitle')}</p>
+    </div>
+
+    <!-- Team Card(s) -->
+    <div class="flex justify-center">
+      <div class="bg-white rounded-2xl shadow-md overflow-hidden max-w-sm w-full">
+        <div class="aspect-square bg-primary/10 overflow-hidden">
+          <img
+            src="/images/dr-sanchez.jpg"
+            alt="Dr. Darlene O. Sanchez, DVM — Veterinarian and President of Loving Hands Animal Hospital"
+            class="w-full h-full object-cover"
+            width="400"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-6 flex flex-col gap-2">
+          <h3 class="font-heading font-bold text-xl text-primary">
+            {t('team.dr_sanchez.name')}
+          </h3>
+          <p class="text-sm font-semibold text-secondary">
+            {t('team.dr_sanchez.title')}
+          </p>
+          <p class="text-xs text-muted mt-2 leading-relaxed">
+            {t('team.dr_sanchez.specialties')}
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

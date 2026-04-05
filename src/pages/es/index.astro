@@ -1,0 +1,30 @@
+---
+/**
+ * Spanish Home Page (/es/)
+ *
+ * Identical structure to the English page — same sections,
+ * but lang="es" so all t() calls return Spanish strings.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroSection from '@/components/sections/HeroSection.astro';
+import ServicesSection from '@/components/sections/ServicesSection.astro';
+import WhyUsSection from '@/components/sections/WhyUsSection.astro';
+import TeamSection from '@/components/sections/TeamSection.astro';
+import ContactSection from '@/components/sections/ContactSection.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t('meta.home.title')}
+  description={t('meta.home.description')}
+>
+  <HeroSection lang={lang} />
+  <ServicesSection lang={lang} />
+  <WhyUsSection lang={lang} />
+  <TeamSection lang={lang} />
+  <ContactSection lang={lang} />
+</BaseLayout>
