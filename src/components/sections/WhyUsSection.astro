@@ -42,7 +42,8 @@ const reasons = [
     <!-- Reasons Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {reasons.map(({ key, icon }) => (
-        <div class="flex flex-col gap-4 p-6 rounded-2xl bg-white/10 hover:bg-white/15 transition-colors">
+        <div class="flex flex-col gap-4 p-6 rounded-2xl bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md border border-white/10">
+
           <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white" aria-hidden="true">
             <Fragment set:html={icon} />
           </div>
