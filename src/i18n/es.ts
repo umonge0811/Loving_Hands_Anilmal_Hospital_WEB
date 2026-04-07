@@ -92,5 +92,17 @@ export const es = {
 'testimonials.subtitle': 'Reseñas reales de dueños de mascotas en Chino, CA.',
 'testimonials.yelp_cta': 'Leer más reseñas en Yelp →',
 
+// ─── Gallery ───────────────────────────────────────────────────
+'gallery.title': 'Nuestro Hospital y Equipo',
+'gallery.subtitle': 'Un vistazo al corazón de Loving Hands Animal Hospital.',
+
+// ─── Gallery Captions ──────────────────────────────────────────
+'gallery.caption.1': 'Dra. Darlene O. Sanchez, DVM',
+'gallery.caption.2': 'Equipo de Loving Hands Animal Hospital',
+'gallery.caption.3': 'Atención de Mascotas en Loving Hands',
+'gallery.caption.4': 'Atención Veterinaria en Loving Hands',
+'gallery.caption.5': 'Sashimi — siempre en nuestros corazones',
+'gallery.caption.6': 'Loving Hands Animal Hospital',
+
 
 } as const;

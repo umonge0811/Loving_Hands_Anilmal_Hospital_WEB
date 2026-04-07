@@ -1,0 +1,89 @@
+---
+import { useTranslations } from '@/i18n/utils';
+import type { Lang } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const images = [
+  { src: '/images/gallery/gallery-1.jpg', alt: 'Dr. Darlene O. Sanchez, DVM', span: 'md:col-span-2 md:row-span-2' },
+  { src: '/images/gallery/gallery-2.jpg', alt: 'Loving Hands Animal Hospital team', span: '' },
+  { src: '/images/gallery/gallery-3.jpg', alt: 'Pet care at Loving Hands Animal Hospital', span: '' },
+  { src: '/images/gallery/gallery-4.jpg', alt: 'Veterinary care at Loving Hands', span: '' },
+  { src: '/images/gallery/gallery-5.jpg', alt: 'Sashimi — always in our hearts', span: 'md:col-span-2' },
+  { src: '/images/gallery/gallery-6.jpg', alt: 'Loving Hands Animal Hospital', span: '' },
+];
+---
+
+<section id="gallery" class="py-16 md:py-24 bg-white">
+  <div class="container mx-auto px-4 max-w-6xl">
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="section-title">{t('gallery.title')}</h2>
+      <p class="section-subtitle">{t('gallery.subtitle')}</p>
+    </div>
+
+<!-- Bento Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:[grid-template-rows:280px_280px]">
+
+    <div class="group relative overflow-hidden rounded-2xl bg-accent col-span-1 md:row-span-2 aspect-square md:aspect-auto">
+      <img src="/images/gallery/gallery-1.jpg" alt="Dr. Darlene O. Sanchez, DVM"
+        class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+        <p class="text-white text-sm font-medium">{t('gallery.caption.1')}</p>
+      </div>
+    </div>
+  
+    <div class="group relative overflow-hidden rounded-2xl bg-accent aspect-square md:aspect-auto">
+      <img src="/images/gallery/gallery-2.jpg" alt="Loving Hands Animal Hospital team"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+        <p class="text-white text-sm font-medium">{t('gallery.caption.2')}</p>
+      </div>
+    </div>
+  
+    <div class="group relative overflow-hidden rounded-2xl bg-accent aspect-square md:aspect-auto">
+      <img src="/images/gallery/gallery-3.jpg" alt="Pet care at Loving Hands"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+        <p class="text-white text-sm font-medium">{t('gallery.caption.3')}</p>
+      </div>
+    </div>
+  
+    <div class="group relative overflow-hidden rounded-2xl bg-accent aspect-square md:aspect-auto">
+      <img src="/images/gallery/gallery-4.jpg" alt="Veterinary care at Loving Hands"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+        <p class="text-white text-sm font-medium">{t('gallery.caption.4')}</p>
+      </div>
+    </div>
+  
+    <div class="group relative overflow-hidden rounded-2xl bg-accent col-span-2 md:col-span-2 aspect-video md:aspect-auto">
+      <img src="/images/gallery/gallery-5.jpg" alt="Sashimi — always in our hearts"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+        <p class="text-white text-sm font-medium">{t('gallery.caption.5')}</p>
+      </div>
+    </div>
+  
+    <div class="group relative overflow-hidden rounded-2xl bg-accent col-span-2 md:col-span-1 aspect-video md:aspect-auto">
+        <img src="/images/gallery/gallery-6.jpg" alt="Loving Hands Animal Hospital"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+        <p class="text-white text-sm font-medium">{t('gallery.caption.6')}</p>
+      </div>
+    </div>
+  
+  </div>
+  
+  
+  
+  
+
+  </div>
+</section>
