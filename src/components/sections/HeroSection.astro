@@ -1,6 +1,15 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import type { Lang } from "@/i18n/utils";
+import { Image } from "astro:assets";
+import hero1 from "@/assets/hero/hero-1.png";
+import hero2 from "@/assets/hero/hero-2.png";
+import hero3 from "@/assets/hero/hero-3.png";
+import hero4 from "@/assets/hero/hero-4.png";
+
+interface Props {
+  lang: Lang;
+}
 
 interface Props {
   lang: Lang;
@@ -8,6 +17,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+const heroImages = [hero1, hero2, hero3, hero4];
 ---
 
 <section
@@ -17,17 +28,26 @@ const t = useTranslations(lang);
   <!-- Decorative background shape -->
   <!-- Slideshow de fondo -->
   <div id="hero-slideshow" class="absolute inset-0 z-0">
-    {
-      [1, 2, 3, 4].map((n) => (
-        <div
-          class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-          style={`background-image: url('/images/hero/hero-${n}.png')`}
-          data-slide={n}
-          aria-hidden="true"
+    {heroImages.map((img, i) => (
+      <div
+        class="hero-slide absolute inset-0 transition-opacity duration-1000"
+        data-slide={i}
+        aria-hidden="true"
+      >
+        <Image
+          src={img}
+          alt=""
+          class="w-full h-full object-cover"
+          width={1920}
+          height={700}
+          format="webp"
+          quality={80}
+          loading={i === 0 ? "eager" : "lazy"}
         />
-      ))
-    }
+      </div>
+    ))}
   </div>
+  
 
   <!-- Overlay oscuro para legibilidad del texto -->
   <div class="absolute inset-0 z-10 bg-black/30" aria-hidden="true"></div>
