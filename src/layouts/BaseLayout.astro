@@ -11,6 +11,7 @@
  * - Navbar and Footer
  */
 import Navbar from '@/components/layout/Navbar.astro';
+import EmergencyBanner from '@/components/layout/EmergencyBanner.astro';
 import Footer from '@/components/layout/Footer.astro';
 import ScrollToTop from '@/components/ui/ScrollToTop.astro';
 import '@/styles/global.css';
@@ -63,6 +64,7 @@ const esUrl = Astro.url.href.includes('/es/') ? Astro.url.href : Astro.url.href.
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body class="flex flex-col min-h-screen">
+    <EmergencyBanner lang={lang} />
     <Navbar lang={lang} />
 
     <main class="flex-grow">

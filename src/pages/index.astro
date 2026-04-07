@@ -11,6 +11,8 @@ import ServicesSection from '@/components/sections/ServicesSection.astro';
 import WhyUsSection from '@/components/sections/WhyUsSection.astro';
 import TeamSection from '@/components/sections/TeamSection.astro';
 import ContactSection from '@/components/sections/ContactSection.astro';
+import TestimonialsSection from '@/components/sections/TestimonialsSection.astro';
+
 import { useTranslations } from '@/i18n/utils';
 
 const lang = 'en';
@@ -26,5 +28,6 @@ const t = useTranslations(lang);
   <ServicesSection lang={lang} />
   <WhyUsSection lang={lang} />
   <TeamSection lang={lang} />
+  <TestimonialsSection lang={lang} />
   <ContactSection lang={lang} />
 </BaseLayout>

@@ -13,7 +13,7 @@ export const en = {
   'hero.subtitle': 'Traditional and holistic veterinary medicine in Chino, CA. Open every day, emergencies welcome.',
   'hero.cta.primary': 'Book an Appointment',
   'hero.cta.secondary': 'Our Services',
-  'hero.badge': 'Open Everyday 9am – 9pm',
+  'hero.badge': 'Mon–Fri 9AM–7PM · Weekends 24hr Emergency',
 
   // ─── Services Section ──────────────────────────────────────────
   'services.title': 'Our Services',
@@ -40,12 +40,12 @@ export const en = {
 
   // ─── Why Choose Us ─────────────────────────────────────────────
   'why.title': 'Why Choose Loving Hands?',
-  'why.hours.title': 'Open Every Day',
-  'why.hours.description': '9am to 9pm, 365 days a year. Because pets don\'t follow schedules.',
+  'why.hours.title': 'Open Mon – Fri',
+  'why.hours.description': 'General veterinary care Monday through Friday, 9:00 AM to 7:00 PM. No appointment needed for urgent cases.',
   'why.holistic.title': 'Holistic Approach',
   'why.holistic.description': 'We combine traditional medicine with holistic therapies for whole-body wellness.',
-  'why.emergency.title': 'Emergencies Welcome',
-  'why.emergency.description': 'No appointment needed for emergencies. Walk in and we\'ll take care of your pet.',
+  'why.emergency.title': 'Weekend Emergency Hospital',
+  'why.emergency.description': 'Open 24 hours Saturday and Sunday. No appointment needed — walk in and we will take care of your pet.',
   'why.quality.title': 'High-Quality Medicine',
   'why.quality.description': 'State-of-the-art equipment and evidence-based treatments.',
 
@@ -61,7 +61,7 @@ export const en = {
   'contact.email.label': 'Email',
   'contact.email.value': 'lovinghandsanimalhospital@gmail.com',
   'contact.hours.label': 'Hours',
-  'contact.hours.value': 'Open Everyday · 9:00 AM – 9:00 PM',
+  'contact.hours.value': 'Mon–Fri 9:00 AM–7:00 PM · Sat–Sun 24hr Emergency',
 
   // ─── Footer ────────────────────────────────────────────────────
   'footer.tagline': 'High Quality Medicine · Compassionate Care · Superb Customer Service',
@@ -73,7 +73,27 @@ export const en = {
 
   // ─── SEO / Meta ────────────────────────────────────────────────
   'meta.home.title': 'Loving Hands Animal Hospital | Veterinary Care in Chino, CA',
-  'meta.home.description': 'Full-service veterinary hospital in Chino, CA. Open every day 9am-9pm. Traditional & holistic medicine, emergencies welcome. Call (909) 591-2273.',
+  'meta.home.description': 'Full-service veterinary hospital in Chino, CA. Mon–Fri 9am–7pm. Weekend 24-hour emergency hospital. Traditional & holistic medicine. Call (909) 591-2273.',
+
+  // ─── Emergency Banner ──────────────────────────────────────────
+'emergency.banner.text': 'Weekend Emergency Hospital',
+'emergency.banner.sub': 'Open Sat & Sun · 24 Hours · No Appointment Needed',
+'emergency.banner.cta': 'Call Now',
+
+// ─── Hours (updated) ───────────────────────────────────────────
+'hours.weekday.label': 'Mon – Fri',
+'hours.weekday.value': '9:00 AM – 7:00 PM',
+'hours.weekend.label': 'Sat – Sun',
+'hours.weekend.value': '24-Hour Emergency',
+
+// ─── Testimonials ──────────────────────────────────────────────
+'testimonials.title': 'What Our Clients Say',
+'testimonials.subtitle': 'Real reviews from real pet owners in Chino, CA.',
+'testimonials.yelp_cta': 'Read more reviews on Yelp →',
+
+
+
+
 } as const;
 
 export type TranslationKey = keyof typeof en;

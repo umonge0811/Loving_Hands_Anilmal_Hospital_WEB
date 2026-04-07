@@ -13,7 +13,7 @@ export const es = {
   'hero.subtitle': 'Medicina veterinaria tradicional y holística en Chino, CA. Abiertos todos los días, emergencias bienvenidas.',
   'hero.cta.primary': 'Reservar una Cita',
   'hero.cta.secondary': 'Nuestros Servicios',
-  'hero.badge': 'Abiertos Todos los Días 9am – 9pm',
+  'hero.badge': 'Lun–Vie 9AM–7PM · Fines de Semana Emergencias 24hrs',
 
   // ─── Services Section ──────────────────────────────────────────
   'services.title': 'Nuestros Servicios',
@@ -40,12 +40,12 @@ export const es = {
 
   // ─── Why Choose Us ─────────────────────────────────────────────
   'why.title': '¿Por qué Elegir Loving Hands?',
-  'why.hours.title': 'Abiertos Todos los Días',
-  'why.hours.description': 'De 9am a 9pm, los 365 días del año. Porque las mascotas no siguen horarios.',
+  'why.hours.title': 'Abiertos Lun – Vie',
+  'why.hours.description': 'Atención veterinaria general de lunes a viernes, 9:00 AM a 7:00 PM. No se requiere cita para casos urgentes.',
   'why.holistic.title': 'Enfoque Holístico',
   'why.holistic.description': 'Combinamos medicina tradicional con terapias holísticas para el bienestar integral.',
-  'why.emergency.title': 'Emergencias Bienvenidas',
-  'why.emergency.description': 'No necesita cita para emergencias. Llegue y cuidaremos a su mascota.',
+  'why.emergency.title': 'Hospital de Emergencias los Fines de Semana',
+  'why.emergency.description': 'Abiertos 24 horas los sábados y domingos. Sin cita previa — llegue y cuidaremos a su mascota.',
   'why.quality.title': 'Medicina de Alta Calidad',
   'why.quality.description': 'Equipos de última generación y tratamientos basados en evidencia.',
 
@@ -61,7 +61,7 @@ export const es = {
   'contact.email.label': 'Correo Electrónico',
   'contact.email.value': 'lovinghandsanimalhospital@gmail.com',
   'contact.hours.label': 'Horario',
-  'contact.hours.value': 'Abiertos Todos los Días · 9:00 AM – 9:00 PM',
+  'contact.hours.value': 'Lun–Vie 9:00 AM–7:00 PM · Sáb–Dom Emergencias 24 Horas',
 
   // ─── Footer ────────────────────────────────────────────────────
   'footer.tagline': 'Medicina de Alta Calidad · Atención Compasiva · Servicio al Cliente Superior',
@@ -74,5 +74,23 @@ export const es = {
 
   // ─── SEO / Meta ────────────────────────────────────────────────
   'meta.home.title': 'Loving Hands Animal Hospital | Veterinaria en Chino, CA',
-  'meta.home.description': 'Hospital veterinario en Chino, CA. Abierto todos los días 9am-9pm. Medicina tradicional y holística, emergencias bienvenidas. Llame al (909) 591-2273.',
+  'meta.home.description': 'Hospital veterinario en Chino, CA. Lun–Vie 9am–7pm. Emergencias 24 horas los fines de semana. Medicina tradicional y holística. Llame al (909) 591-2273.',
+
+  // ─── Emergency Banner ──────────────────────────────────────────
+'emergency.banner.text': 'Hospital de Emergencias los Fines de Semana',
+'emergency.banner.sub': 'Sáb & Dom · 24 Horas · Sin Cita Previa',
+'emergency.banner.cta': 'Llamar Ahora',
+
+// ─── Hours (updated) ───────────────────────────────────────────
+'hours.weekday.label': 'Lun – Vie',
+'hours.weekday.value': '9:00 AM – 7:00 PM',
+'hours.weekend.label': 'Sáb – Dom',
+'hours.weekend.value': 'Emergencias 24 Horas',
+
+// ─── Testimonials ──────────────────────────────────────────────
+'testimonials.title': 'Lo Que Dicen Nuestros Clientes',
+'testimonials.subtitle': 'Reseñas reales de dueños de mascotas en Chino, CA.',
+'testimonials.yelp_cta': 'Leer más reseñas en Yelp →',
+
+
 } as const;

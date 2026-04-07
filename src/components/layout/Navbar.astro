@@ -18,7 +18,7 @@ const navLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-white shadow-sm">
+<header id="navbar" class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
   <nav class="container mx-auto px-4 max-w-6xl" aria-label="Main navigation">
     <div class="flex items-center justify-between h-16 md:h-20">
 
@@ -153,5 +153,17 @@ const navLinks = [
     }
   }, { passive: true });
 
+  // ─── Navbar blur al scroll ───────────────────────────────────
+  const navbar = document.getElementById('navbar');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      navbar?.classList.add('bg-white/80', 'shadow-md');
+      navbar?.classList.remove('bg-white/95', 'shadow-sm');
+    } else {
+      navbar?.classList.add('bg-white/95', 'shadow-sm');
+      navbar?.classList.remove('bg-white/80', 'shadow-md');
+    }
+  }, { passive: true });
 
 </script>
