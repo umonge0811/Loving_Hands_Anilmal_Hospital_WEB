@@ -1,0 +1,125 @@
+---
+import PortalLayout from '@/layouts/PortalLayout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const lang = 'es';
+const t = useTranslations(lang);
+
+const pets = [
+  {
+    name: 'Bella',
+    species: 'Perro',
+    breed: 'Golden Retriever',
+    age: '4 años',
+    weight: '28 kg',
+    lastVisit: '10 abr, 2026',
+    icon: '🐶',
+    color: 'from-amber-50 to-orange-50',
+    badgeColor: 'bg-amber-100 text-amber-700',
+  },
+  {
+    name: 'Max',
+    species: 'Gato',
+    breed: 'Doméstico Pelo Corto',
+    age: '6 años',
+    weight: '4.5 kg',
+    lastVisit: '22 mar, 2026',
+    icon: '🐱',
+    color: 'from-blue-50 to-indigo-50',
+    badgeColor: 'bg-blue-100 text-blue-700',
+  },
+  {
+    name: 'Coco',
+    species: 'Ave',
+    breed: 'Cacatúa',
+    age: '2 años',
+    weight: '99 g',
+    lastVisit: '5 feb, 2026',
+    icon: '🦜',
+    color: 'from-green-50 to-emerald-50',
+    badgeColor: 'bg-green-100 text-green-700',
+  },
+];
+---
+
+<PortalLayout
+  lang={lang}
+  title={t('meta.portal.pets.title')}
+  activePage="pets"
+>
+  <div class="p-6 md:p-8 max-w-5xl mx-auto">
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="font-heading text-2xl md:text-3xl font-bold text-gray-900">
+          {t('portal.pets.title')}
+        </h1>
+        <p class="text-muted mt-1">{t('portal.pets.subtitle')}</p>
+      </div>
+      <button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors shadow-sm self-start sm:self-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        {t('portal.pets.add')}
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      {pets.map(pet => (
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
+          <div class={`bg-gradient-to-br ${pet.color} px-6 py-5 flex items-center gap-4`}>
+            <div class="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center text-3xl">
+              {pet.icon}
+            </div>
+            <div>
+              <h3 class="font-heading font-bold text-lg text-gray-900">{pet.name}</h3>
+              <span class={`inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full ${pet.badgeColor}`}>
+                {pet.species}
+              </span>
+            </div>
+          </div>
+
+          <div class="px-6 py-4 space-y-2.5">
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">{t('portal.pets.breed')}</span>
+              <span class="font-medium text-gray-800">{pet.breed}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">{t('portal.pets.dob')}</span>
+              <span class="font-medium text-gray-800">{pet.age}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-muted">{t('portal.pets.weight')}</span>
+              <span class="font-medium text-gray-800">{pet.weight}</span>
+            </div>
+            <div class="flex justify-between text-sm pt-1 border-t border-gray-100">
+              <span class="text-muted">{t('portal.pets.lastVisit')}</span>
+              <span class="font-medium text-gray-800">{pet.lastVisit}</span>
+            </div>
+          </div>
+
+          <div class="px-6 pb-5 flex gap-2">
+            <a href="/es/portal/appointments"
+               class="flex-1 text-center py-2 rounded-xl text-xs font-semibold border border-primary text-primary hover:bg-primary hover:text-white transition-colors">
+              {t('portal.pets.bookAppt')}
+            </a>
+            <button
+               class="flex-1 text-center py-2 rounded-xl text-xs font-semibold bg-accent text-primary hover:bg-secondary/20 transition-colors">
+              {t('portal.pets.viewHistory')}
+            </button>
+          </div>
+        </div>
+      ))}
+
+      <button class="bg-white rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center gap-3 p-8 hover:border-primary hover:bg-accent transition-colors group min-h-[220px]">
+        <div class="w-14 h-14 rounded-full border-2 border-dashed border-gray-300 group-hover:border-primary flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        <span class="text-sm font-medium text-muted group-hover:text-primary transition-colors">{t('portal.pets.add')}</span>
+      </button>
+    </div>
+
+  </div>
+</PortalLayout>

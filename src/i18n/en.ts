@@ -105,6 +105,86 @@ export const en = {
 
 
 
+  // ─── Client Portal — Navigation ───────────────────────────────
+  'portal.nav.dashboard': 'Dashboard',
+  'portal.nav.pets': 'My Pets',
+  'portal.nav.appointments': 'Appointments',
+  'portal.nav.profile': 'My Profile',
+  'portal.nav.logout': 'Sign Out',
+  'portal.nav.backToSite': 'Back to Website',
+
+  // ─── Client Portal — Login ─────────────────────────────────────
+  'portal.login.title': 'Client Portal',
+  'portal.login.subtitle': 'Sign in to manage your pets & appointments',
+  'portal.login.email': 'Email Address',
+  'portal.login.password': 'Password',
+  'portal.login.forgot': 'Forgot your password?',
+  'portal.login.submit': 'Sign In',
+  'portal.login.or': 'or continue with',
+  'portal.login.sso': 'Sign in with Hospital SSO',
+  'portal.login.noAccount': "Don't have an account?",
+  'portal.login.register': 'Create account',
+  'portal.login.demo': 'Demo mode — no real login required',
+
+  // ─── Client Portal — Dashboard ─────────────────────────────────
+  'portal.dashboard.welcome': 'Welcome back, {name}!',
+  'portal.dashboard.subtitle': "Here's a summary of your pets and upcoming appointments.",
+  'portal.dashboard.stat.pets': 'Registered Pets',
+  'portal.dashboard.stat.upcoming': 'Upcoming Appointments',
+  'portal.dashboard.stat.lastVisit': 'Last Visit',
+  'portal.dashboard.upcoming.title': 'Upcoming Appointments',
+  'portal.dashboard.upcoming.empty': 'No upcoming appointments scheduled.',
+  'portal.dashboard.book': 'Book an Appointment',
+  'portal.dashboard.viewAll': 'View All',
+  'portal.dashboard.quickActions': 'Quick Actions',
+  'portal.dashboard.action.book': 'Book Appointment',
+  'portal.dashboard.action.pets': 'Add a Pet',
+  'portal.dashboard.action.history': 'Medical History',
+  'portal.dashboard.action.profile': 'Edit Profile',
+
+  // ─── Client Portal — Pets ──────────────────────────────────────
+  'portal.pets.title': 'My Pets',
+  'portal.pets.subtitle': 'Manage your pets and view their medical history.',
+  'portal.pets.add': 'Add Pet',
+  'portal.pets.empty': 'No pets registered yet. Add your first pet!',
+  'portal.pets.species': 'Species',
+  'portal.pets.breed': 'Breed',
+  'portal.pets.dob': 'Date of Birth',
+  'portal.pets.weight': 'Weight',
+  'portal.pets.lastVisit': 'Last Visit',
+  'portal.pets.viewHistory': 'Medical History',
+  'portal.pets.bookAppt': 'Book Appointment',
+  'portal.pets.years': '{count} yrs',
+  'portal.pets.months': '{count} mo',
+
+  // ─── Client Portal — Appointments ─────────────────────────────
+  'portal.appt.title': 'My Appointments',
+  'portal.appt.subtitle': 'View, manage, and schedule your pet appointments.',
+  'portal.appt.new': 'New Appointment',
+  'portal.appt.filter.all': 'All',
+  'portal.appt.filter.upcoming': 'Upcoming',
+  'portal.appt.filter.past': 'Past',
+  'portal.appt.status.scheduled': 'Scheduled',
+  'portal.appt.status.completed': 'Completed',
+  'portal.appt.status.cancelled': 'Cancelled',
+  'portal.appt.col.date': 'Date & Time',
+  'portal.appt.col.pet': 'Pet',
+  'portal.appt.col.service': 'Service',
+  'portal.appt.col.vet': 'Veterinarian',
+  'portal.appt.col.status': 'Status',
+  'portal.appt.col.actions': 'Actions',
+  'portal.appt.cancel': 'Cancel',
+  'portal.appt.details': 'Details',
+  'portal.appt.empty': 'No appointments found.',
+  'portal.appt.cancelConfirm': 'Are you sure you want to cancel this appointment?',
+
+  // ─── Client Portal — SEO ──────────────────────────────────────
+  'meta.portal.login.title': 'Client Portal | Loving Hands Animal Hospital',
+  'meta.portal.login.description': 'Sign in to manage your pets and appointments at Loving Hands Animal Hospital.',
+  'meta.portal.dashboard.title': 'Dashboard | Client Portal — Loving Hands',
+  'meta.portal.pets.title': 'My Pets | Client Portal — Loving Hands',
+  'meta.portal.appointments.title': 'Appointments | Client Portal — Loving Hands',
+
 } as const;
 
 export type TranslationKey = keyof typeof en;

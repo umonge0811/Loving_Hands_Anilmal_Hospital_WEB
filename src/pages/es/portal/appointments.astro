@@ -1,0 +1,165 @@
+---
+import PortalLayout from '@/layouts/PortalLayout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const lang = 'es';
+const t = useTranslations(lang);
+
+const appointments = [
+  { id: 1, pet: 'Bella', petIcon: '🐶', service: 'Examen de Bienestar', date: '28 abr, 2026', time: '10:00 AM', vet: 'Dra. Sanchez', status: 'scheduled' },
+  { id: 2, pet: 'Max', petIcon: '🐱', service: 'Limpieza Dental', date: '5 may, 2026', time: '2:30 PM', vet: 'Dra. Sanchez', status: 'scheduled' },
+  { id: 3, pet: 'Bella', petIcon: '🐶', service: 'Vacunación', date: '10 abr, 2026', time: '9:00 AM', vet: 'Dra. Sanchez', status: 'completed' },
+  { id: 4, pet: 'Coco', petIcon: '🦜', service: 'Examen de Bienestar', date: '5 feb, 2026', time: '11:30 AM', vet: 'Dra. Sanchez', status: 'completed' },
+  { id: 5, pet: 'Max', petIcon: '🐱', service: 'Consulta Quirúrgica', date: '15 ene, 2026', time: '3:00 PM', vet: 'Dra. Sanchez', status: 'cancelled' },
+];
+
+const statusStyles: Record<string, string> = {
+  scheduled: 'bg-primary/10 text-primary',
+  completed: 'bg-emerald-100 text-emerald-700',
+  cancelled: 'bg-red-100 text-red-600',
+};
+
+const statusLabels: Record<string, string> = {
+  scheduled: t('portal.appt.status.scheduled'),
+  completed: t('portal.appt.status.completed'),
+  cancelled: t('portal.appt.status.cancelled'),
+};
+---
+
+<PortalLayout
+  lang={lang}
+  title={t('meta.portal.appointments.title')}
+  activePage="appointments"
+>
+  <div class="p-6 md:p-8 max-w-5xl mx-auto">
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="font-heading text-2xl md:text-3xl font-bold text-gray-900">
+          {t('portal.appt.title')}
+        </h1>
+        <p class="text-muted mt-1">{t('portal.appt.subtitle')}</p>
+      </div>
+      <button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors shadow-sm self-start sm:self-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        {t('portal.appt.new')}
+      </button>
+    </div>
+
+    <div class="flex gap-2 mb-6" id="filter-tabs">
+      {(['all', 'upcoming', 'past'] as const).map((filter, i) => (
+        <button
+          data-filter={filter}
+          class={`px-4 py-2 rounded-xl text-sm font-medium transition-colors filter-btn ${i === 0 ? 'bg-primary text-white' : 'bg-white text-muted border border-gray-200 hover:text-primary hover:border-primary'}`}>
+          {filter === 'all' ? t('portal.appt.filter.all') : filter === 'upcoming' ? t('portal.appt.filter.upcoming') : t('portal.appt.filter.past')}
+        </button>
+      ))}
+    </div>
+
+    <!-- Desktop table -->
+    <div class="hidden md:block bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-gray-100 bg-gray-50">
+            <th class="text-left text-xs font-semibold text-muted uppercase tracking-wide px-6 py-3">{t('portal.appt.col.date')}</th>
+            <th class="text-left text-xs font-semibold text-muted uppercase tracking-wide px-6 py-3">{t('portal.appt.col.pet')}</th>
+            <th class="text-left text-xs font-semibold text-muted uppercase tracking-wide px-6 py-3">{t('portal.appt.col.service')}</th>
+            <th class="text-left text-xs font-semibold text-muted uppercase tracking-wide px-6 py-3">{t('portal.appt.col.vet')}</th>
+            <th class="text-left text-xs font-semibold text-muted uppercase tracking-wide px-6 py-3">{t('portal.appt.col.status')}</th>
+            <th class="text-left text-xs font-semibold text-muted uppercase tracking-wide px-6 py-3">{t('portal.appt.col.actions')}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          {appointments.map(appt => (
+            <tr class="hover:bg-gray-50 transition-colors appt-row" data-status={appt.status}>
+              <td class="px-6 py-4">
+                <p class="text-sm font-medium text-gray-900">{appt.date}</p>
+                <p class="text-xs text-muted">{appt.time}</p>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">{appt.petIcon}</span>
+                  <span class="text-sm font-medium text-gray-800">{appt.pet}</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-700">{appt.service}</td>
+              <td class="px-6 py-4 text-sm text-gray-700">{appt.vet}</td>
+              <td class="px-6 py-4">
+                <span class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${statusStyles[appt.status]}`}>
+                  {statusLabels[appt.status]}
+                </span>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <button class="text-xs font-medium text-primary hover:underline">{t('portal.appt.details')}</button>
+                  {appt.status === 'scheduled' && (
+                    <button class="text-xs font-medium text-red-500 hover:underline">{t('portal.appt.cancel')}</button>
+                  )}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile cards -->
+    <div class="md:hidden space-y-3">
+      {appointments.map(appt => (
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 appt-row" data-status={appt.status}>
+          <div class="flex items-start justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">{appt.petIcon}</span>
+              <div>
+                <p class="font-semibold text-gray-900 text-sm">{appt.pet}</p>
+                <p class="text-xs text-muted">{appt.service}</p>
+              </div>
+            </div>
+            <span class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${statusStyles[appt.status]}`}>
+              {statusLabels[appt.status]}
+            </span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-muted border-t border-gray-100 pt-3">
+            <span>{appt.date} · {appt.time}</span>
+            <div class="flex gap-3">
+              <button class="font-medium text-primary">{t('portal.appt.details')}</button>
+              {appt.status === 'scheduled' && (
+                <button class="font-medium text-red-500">{t('portal.appt.cancel')}</button>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</PortalLayout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const rows = document.querySelectorAll<HTMLElement>('.appt-row');
+
+  const filterMap: Record<string, string[]> = {
+    all: ['scheduled', 'completed', 'cancelled'],
+    upcoming: ['scheduled'],
+    past: ['completed', 'cancelled'],
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const filter = tab.dataset.filter ?? 'all';
+      tabs.forEach(t => {
+        t.classList.remove('bg-primary', 'text-white');
+        t.classList.add('bg-white', 'text-muted', 'border', 'border-gray-200');
+      });
+      tab.classList.add('bg-primary', 'text-white');
+      tab.classList.remove('bg-white', 'text-muted', 'border', 'border-gray-200');
+      const visible = filterMap[filter];
+      rows.forEach(row => {
+        row.style.display = visible.includes(row.dataset.status ?? '') ? '' : 'none';
+      });
+    });
+  });
+</script>
