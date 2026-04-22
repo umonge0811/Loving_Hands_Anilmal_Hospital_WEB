@@ -52,6 +52,12 @@ const navLinks = [
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <link rel="icon" type="image/jpeg" href="/images/logo_Loving_Hands.jpg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#7B1D1D" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Loving Hands" />
+    <link rel="apple-touch-icon" href="/images/logo_Loving_Hands.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="robots" content="noindex, nofollow" />
@@ -195,6 +201,14 @@ const navLinks = [
       btn?.addEventListener('click', openMenu);
       closeBtn?.addEventListener('click', closeMenu);
       overlayBg?.addEventListener('click', closeMenu);
+    </script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
     </script>
   </body>
 </html>

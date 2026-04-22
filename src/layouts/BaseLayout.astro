@@ -59,6 +59,13 @@ const esUrl = Astro.url.href.includes('/es/') ? Astro.url.href : Astro.url.href.
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="/images/logo_Loving_Hands.jpg" />
 
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#7B1D1D" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Loving Hands" />
+    <link rel="apple-touch-icon" href="/images/logo_Loving_Hands.jpg" />
 
     <!-- Preconnect to Google Fonts for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -74,5 +81,13 @@ const esUrl = Astro.url.href.includes('/es/') ? Astro.url.href : Astro.url.href.
 
     <Footer lang={lang} />
     <ScrollToTop />
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    </script>
   </body>
 </html>
