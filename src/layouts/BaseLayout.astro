@@ -14,6 +14,7 @@ import Navbar from '@/components/layout/Navbar.astro';
 import EmergencyBanner from '@/components/layout/EmergencyBanner.astro';
 import Footer from '@/components/layout/Footer.astro';
 import ScrollToTop from '@/components/ui/ScrollToTop.astro';
+import InstallPWA from '@/components/ui/InstallPWA.astro';
 import '@/styles/global.css';
 import type { Lang } from '@/i18n/utils';
 
@@ -81,6 +82,7 @@ const esUrl = Astro.url.href.includes('/es/') ? Astro.url.href : Astro.url.href.
 
     <Footer lang={lang} />
     <ScrollToTop />
+    <InstallPWA />
 
     <script>
       if ('serviceWorker' in navigator) {

@@ -1,5 +1,6 @@
 ---
 import '@/styles/global.css';
+import InstallPWA from '@/components/ui/InstallPWA.astro';
 import type { Lang } from '@/i18n/utils';
 import { useTranslations } from '@/i18n/utils';
 
@@ -188,6 +189,7 @@ const navLinks = [
       </main>
 
     </div>
+    <InstallPWA />
 
     <script>
       const btn = document.getElementById('mobile-menu-btn');
