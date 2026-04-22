@@ -1,0 +1,147 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const services = [
+  { id: 1, nameEn: 'Emergency Care',      nameEs: 'Atención de Emergencias', duration: 60,  price: 150,  active: true,  icon: '🚨', category: 'Emergency' },
+  { id: 2, nameEn: 'Wellness Exam',        nameEs: 'Examen de Bienestar',      duration: 45,  price: 75,   active: true,  icon: '🩺', category: 'Preventive' },
+  { id: 3, nameEn: 'Vaccination',          nameEs: 'Vacunación',               duration: 20,  price: 40,   active: true,  icon: '💉', category: 'Preventive' },
+  { id: 4, nameEn: 'Dental Cleaning',      nameEs: 'Limpieza Dental',          duration: 90,  price: 220,  active: true,  icon: '🦷', category: 'Dental' },
+  { id: 5, nameEn: 'Surgery Consultation', nameEs: 'Consulta Quirúrgica',      duration: 30,  price: 100,  active: true,  icon: '🔬', category: 'Surgery' },
+  { id: 6, nameEn: 'Soft Tissue Surgery',  nameEs: 'Cirugía de Tejidos',       duration: 180, price: 800,  active: true,  icon: '⚕️', category: 'Surgery' },
+  { id: 7, nameEn: 'Acupuncture',          nameEs: 'Acupuntura',               duration: 60,  price: 120,  active: true,  icon: '🌿', category: 'Holistic' },
+  { id: 8, nameEn: 'Holistic Therapy',     nameEs: 'Terapia Holística',        duration: 60,  price: 110,  active: true,  icon: '🧘', category: 'Holistic' },
+  { id: 9, nameEn: 'Exotic Animal Exam',   nameEs: 'Examen Animal Exótico',    duration: 45,  price: 90,   active: true,  icon: '🦜', category: 'Exotic' },
+  { id: 10,nameEn: 'X-Ray / Imaging',      nameEs: 'Rayos X / Imágenes',       duration: 30,  price: 130,  active: true,  icon: '🩻', category: 'Diagnostic' },
+  { id: 11,nameEn: 'Blood Panel',          nameEs: 'Panel de Sangre',          duration: 15,  price: 85,   active: true,  icon: '🧪', category: 'Diagnostic' },
+  { id: 12,nameEn: 'Microchipping',        nameEs: 'Microchip',                duration: 15,  price: 45,   active: false, icon: '📡', category: 'Preventive' },
+];
+
+const categories = [...new Set(services.map(s => s.category))];
+
+const categoryColors: Record<string, string> = {
+  Emergency:   'bg-red-100 text-red-700',
+  Preventive:  'bg-emerald-100 text-emerald-700',
+  Dental:      'bg-blue-100 text-blue-700',
+  Surgery:     'bg-purple-100 text-purple-700',
+  Holistic:    'bg-green-100 text-green-700',
+  Exotic:      'bg-amber-100 text-amber-700',
+  Diagnostic:  'bg-indigo-100 text-indigo-700',
+};
+
+const activeCount = services.filter(s => s.active).length;
+const totalRevenue = services.filter(s => s.active).reduce((sum, s) => sum + s.price, 0);
+---
+
+<AdminLayout lang={lang} title={t('meta.admin.services.title')} activePage="services">
+  <div class="p-6 md:p-8 max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="font-heading text-2xl md:text-3xl font-bold text-gray-900">{t('admin.services.title')}</h1>
+        <p class="text-muted mt-1">{t('admin.services.subtitle')}</p>
+      </div>
+      <button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors shadow-sm self-start">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        {t('admin.services.new')}
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      {[
+        { label: 'Active Services', value: String(activeCount), icon: '✅' },
+        { label: 'Inactive', value: String(services.length - activeCount), icon: '⏸️' },
+        { label: 'Categories', value: String(categories.length), icon: '📂' },
+        { label: 'Avg. Price', value: `$${Math.round(services.reduce((s,x) => s + x.price, 0) / services.length)}`, icon: '💲' },
+      ].map(stat => (
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 flex items-center gap-4">
+          <span class="text-2xl">{stat.icon}</span>
+          <div>
+            <p class="text-xl font-bold text-gray-900">{stat.value}</p>
+            <p class="text-xs text-muted">{stat.label}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Category filter -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      <button data-cat="all" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-primary text-white transition-colors cat-btn">All</button>
+      {categories.map(cat => (
+        <button data-cat={cat} class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-white text-muted border border-gray-200 hover:border-primary hover:text-primary transition-colors cat-btn">
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Services grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" id="services-grid">
+      {services.map(service => (
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow service-card" data-cat={service.category} data-active={service.active}>
+
+          <div class={`px-5 py-4 flex items-start justify-between ${!service.active ? 'opacity-50' : ''}`}>
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-accent flex items-center justify-center text-2xl flex-shrink-0">
+                {service.icon}
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 text-sm">{service.nameEn}</h3>
+                <p class="text-xs text-muted italic">{service.nameEs}</p>
+              </div>
+            </div>
+            <span class={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold flex-shrink-0 ${service.active ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
+              {service.active ? t('admin.services.status.active') : t('admin.services.status.inactive')}
+            </span>
+          </div>
+
+          <div class={`px-5 pb-4 ${!service.active ? 'opacity-50' : ''}`}>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-3 text-sm">
+                <span class="flex items-center gap-1 text-muted">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  {service.duration} min
+                </span>
+                <span class="font-bold text-gray-900">${service.price}</span>
+              </div>
+              <span class={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryColors[service.category]}`}>
+                {service.category}
+              </span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button class="flex-1 py-2 rounded-xl text-xs font-semibold border border-primary text-primary hover:bg-primary hover:text-white transition-colors">
+                {t('admin.services.action.edit')}
+              </button>
+              <button class={`flex-1 py-2 rounded-xl text-xs font-semibold transition-colors ${service.active ? 'border border-red-200 text-red-500 hover:bg-red-50' : 'border border-emerald-200 text-emerald-600 hover:bg-emerald-50'}`}>
+                {service.active ? t('admin.services.action.deactivate') : t('admin.services.action.activate')}
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</AdminLayout>
+
+<script>
+  const catBtns = document.querySelectorAll<HTMLButtonElement>('.cat-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.service-card');
+
+  catBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catBtns.forEach(b => { b.classList.remove('bg-primary','text-white'); b.classList.add('bg-white','text-muted','border','border-gray-200'); });
+      btn.classList.add('bg-primary','text-white');
+      btn.classList.remove('bg-white','text-muted','border','border-gray-200');
+      const cat = btn.dataset.cat;
+      cards.forEach(card => { card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none'; });
+    });
+  });
+</script>

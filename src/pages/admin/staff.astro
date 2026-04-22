@@ -1,0 +1,134 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const staffMembers = [
+  { id: 1, name: 'Dr. Darlene Sanchez', role: 'vet',          email: 'darlene@lovinghands.com',  phone: '(909) 591-2273', lastLogin: 'Today, 8:45 AM',  active: true,  initials: 'DS', color: 'bg-primary' },
+  { id: 2, name: 'Maria Gutierrez',      role: 'receptionist', email: 'maria@lovinghands.com',    phone: '(909) 591-2274', lastLogin: 'Today, 9:01 AM',  active: true,  initials: 'MG', color: 'bg-secondary' },
+  { id: 3, name: 'James Torres',         role: 'technician',   email: 'james@lovinghands.com',    phone: '(909) 591-2275', lastLogin: 'Today, 8:58 AM',  active: true,  initials: 'JT', color: 'bg-emerald-600' },
+  { id: 4, name: 'Sofia Reyes',          role: 'technician',   email: 'sofia@lovinghands.com',    phone: '(909) 591-2276', lastLogin: 'Yesterday, 5:30 PM', active: true, initials: 'SR', color: 'bg-blue-600' },
+  { id: 5, name: 'Admin User',           role: 'admin',        email: 'admin@lovinghands.com',    phone: '(909) 591-2277', lastLogin: 'Apr 20, 2026',   active: true,  initials: 'AU', color: 'bg-purple-600' },
+  { id: 6, name: 'Carlos Mendez',        role: 'receptionist', email: 'carlos@lovinghands.com',   phone: '(909) 591-2278', lastLogin: 'Apr 15, 2026',   active: false, initials: 'CM', color: 'bg-gray-400' },
+];
+
+const roleLabels: Record<string, string> = {
+  admin:        t('admin.staff.role.admin'),
+  vet:          t('admin.staff.role.vet'),
+  receptionist: t('admin.staff.role.receptionist'),
+  technician:   t('admin.staff.role.technician'),
+};
+
+const roleColors: Record<string, string> = {
+  admin:        'bg-purple-100 text-purple-700',
+  vet:          'bg-primary/10 text-primary',
+  receptionist: 'bg-blue-100 text-blue-700',
+  technician:   'bg-emerald-100 text-emerald-700',
+};
+
+const activeCount = staffMembers.filter(s => s.active).length;
+---
+
+<AdminLayout lang={lang} title={t('meta.admin.staff.title')} activePage="staff">
+  <div class="p-6 md:p-8 max-w-5xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="font-heading text-2xl md:text-3xl font-bold text-gray-900">{t('admin.staff.title')}</h1>
+        <p class="text-muted mt-1">{t('admin.staff.subtitle')}</p>
+      </div>
+      <button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors shadow-sm self-start">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        {t('admin.staff.new')}
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      {[
+        { label: 'Active Staff',    value: String(activeCount),                                    color: 'text-emerald-600', bg: 'bg-emerald-50' },
+        { label: 'Veterinarians',   value: String(staffMembers.filter(s => s.role === 'vet').length), color: 'text-primary',     bg: 'bg-primary/10' },
+        { label: 'Receptionists',   value: String(staffMembers.filter(s => s.role === 'receptionist').length), color: 'text-blue-600', bg: 'bg-blue-50' },
+        { label: 'Technicians',     value: String(staffMembers.filter(s => s.role === 'technician').length), color: 'text-secondary',  bg: 'bg-secondary/20' },
+      ].map(stat => (
+        <div class={`rounded-2xl border border-gray-200 shadow-sm p-5 ${stat.bg}`}>
+          <p class={`text-2xl font-bold ${stat.color}`}>{stat.value}</p>
+          <p class="text-xs text-muted mt-0.5">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Staff cards grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {staffMembers.map(member => (
+        <div class={`bg-white rounded-2xl border shadow-sm overflow-hidden transition-shadow hover:shadow-md ${!member.active ? 'border-gray-200 opacity-70' : 'border-gray-200'}`}>
+
+          <div class="flex items-center gap-4 p-5">
+            <!-- Avatar -->
+            <div class={`w-12 h-12 rounded-xl ${member.color} flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm`}>
+              {member.initials}
+            </div>
+
+            <!-- Info -->
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h3 class="font-semibold text-gray-900 text-sm">{member.name}</h3>
+                <span class={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${roleColors[member.role]}`}>
+                  {roleLabels[member.role]}
+                </span>
+              </div>
+              <p class="text-xs text-muted mt-0.5 truncate">{member.email}</p>
+            </div>
+
+            <!-- Status badge -->
+            <span class={`flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${member.active ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
+              <span class={`w-1.5 h-1.5 rounded-full ${member.active ? 'bg-emerald-500' : 'bg-gray-400'}`}></span>
+              {member.active ? t('admin.staff.status.active') : t('admin.staff.status.inactive')}
+            </span>
+          </div>
+
+          <!-- Details row -->
+          <div class="px-5 pb-4 pt-0 border-t border-gray-100 grid grid-cols-2 gap-3 mt-0">
+            <div class="pt-3">
+              <p class="text-xs text-muted">Phone</p>
+              <p class="text-xs font-medium text-gray-700">{member.phone}</p>
+            </div>
+            <div class="pt-3">
+              <p class="text-xs text-muted">{t('admin.staff.col.lastLogin')}</p>
+              <p class="text-xs font-medium text-gray-700">{member.lastLogin}</p>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="px-5 pb-5 flex gap-2">
+            <button class="flex-1 py-2 rounded-xl text-xs font-semibold border border-primary text-primary hover:bg-primary hover:text-white transition-colors">
+              {t('admin.staff.action.edit')}
+            </button>
+            <button class="flex-1 py-2 rounded-xl text-xs font-semibold border border-gray-200 text-muted hover:border-amber-300 hover:text-amber-600 transition-colors">
+              {t('admin.staff.action.resetPwd')}
+            </button>
+            <button class={`flex-1 py-2 rounded-xl text-xs font-semibold transition-colors ${member.active ? 'border border-red-200 text-red-500 hover:bg-red-50' : 'border border-emerald-200 text-emerald-600 hover:bg-emerald-50'}`}>
+              {member.active ? t('admin.staff.action.deactivate') : t('admin.staff.action.activate')}
+            </button>
+          </div>
+        </div>
+      ))}
+
+      <!-- Add member placeholder -->
+      <button class="bg-white rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center gap-3 p-8 hover:border-primary hover:bg-accent transition-colors group min-h-[180px]">
+        <div class="w-12 h-12 rounded-full border-2 border-dashed border-gray-300 group-hover:border-primary flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        <span class="text-sm font-medium text-muted group-hover:text-primary transition-colors">{t('admin.staff.new')}</span>
+      </button>
+    </div>
+
+  </div>
+</AdminLayout>
