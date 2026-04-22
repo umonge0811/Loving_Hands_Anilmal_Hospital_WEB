@@ -1,0 +1,184 @@
+---
+import { useTranslations } from "@/i18n/utils";
+import type { Lang } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-primary text-white">
+  <!-- Main Footer Content -->
+  <div class="container mx-auto px-4 max-w-6xl py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <!-- Brand Column -->
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <img
+            src="/images/logo_Loving_Hands.jpg"
+            alt="Loving Hands Animal Hospital"
+            class="h-10 w-auto brightness-0 invert"
+            width="40"
+            height="40"
+          />
+          <div>
+            <p class="font-heading font-bold leading-tight">Loving Hands</p>
+            <p class="text-xs tracking-widest uppercase text-white/70">
+              Animal Hospital
+            </p>
+          </div>
+        </div>
+        <p class="text-sm text-white/80 leading-relaxed text-balance">
+          {t("footer.tagline")}
+        </p>
+        <!-- Social Links -->
+        <a
+          href="https://www.facebook.com/lovinghandsanimalhospital"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
+          aria-label="Facebook"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+            ></path>
+          </svg>
+          {t("footer.social.facebook")}
+        </a>
+      </div>
+
+      <!-- Services Column -->
+      <div class="flex flex-col gap-3">
+        <h3 class="font-heading font-semibold text-lg">
+          {t("footer.services.title")}
+        </h3>
+        <ul class="flex flex-col gap-2">
+          {
+            [
+              "Acupuncture",
+              "Chiropractic Care",
+              "Dental Care",
+              "Emergency Care",
+              "Microchipping",
+              "Rehabilitation",
+              "Spay & Neuter",
+              "Vaccinations",
+              "Wellness Exam",
+            ].map((service) => (
+              <li class="flex items-center gap-2 text-sm text-white/80">
+                <span class="text-secondary" aria-hidden="true">
+                  ✓
+                </span>
+                {service}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Contact Column -->
+      <div class="flex flex-col gap-3">
+        <h3 class="font-heading font-semibold text-lg">{t("contact.title")}</h3>
+        <address class="not-italic flex flex-col gap-2 text-sm text-white/80">
+          <p>{t("contact.address.value")}</p>
+          <a href="tel:9095912273" class="hover:text-white transition-colors">
+            {t("contact.phone.value")}
+          </a>
+          <a href="sms:9092707277" class="hover:text-white transition-colors">
+            {t("contact.text.label")}: {t("contact.text.value")}
+          </a>
+          <a
+  href="mailto:lovinghandsanimalhospital@gmail.com"
+  class="hover:text-white transition-colors text-xs"
+>
+  lovinghandsanimalhospital@gmail.com
+</a>
+
+          
+        </address>
+      </div>
+
+      <!-- Hours Column -->
+      <div class="flex flex-col gap-3">
+        <h3 class="font-heading font-semibold text-lg">
+          {t("footer.hours.title")}
+        </h3>
+        <div class="bg-white/10 rounded-xl p-4 flex flex-col gap-3">
+          <!-- Lunes a Viernes -->
+          <div class="flex flex-col text-sm gap-1">
+            <span class="text-white/70">{t('hours.weekday.label')}</span>
+            <span class="font-bold text-white">{t('hours.weekday.value')}</span>
+          </div>
+          <!-- Fin de semana -->
+          <div class="border-t border-white/20 pt-3 flex flex-col gap-1">
+            <span class="text-white/70 text-sm">{t('hours.weekend.label')}</span>
+            <span class="font-bold text-secondary">{t('hours.weekend.value')}</span>
+          </div>
+        </div>
+        
+        <a
+          href="tel:9095912273"
+          class="btn-outline border-white text-white hover:bg-white hover:text-primary text-xs px-4 py-2 text-center"
+        >
+          {t("nav.book")}
+        </a>
+      </div>
+
+      <!-- Developed by Column -->
+      <div class="flex flex-col items-center gap-3">
+        <h3 class="font-heading font-semibold text-lg text-white/70">
+          {t("footer.developed_by")}
+        </h3>
+        <a
+          href="https://www.ticodevcr.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group"
+          aria-label="TicoDev CR"
+        >
+          <div
+            class="bg-white rounded-xl p-3 shadow-md transition-transform duration-300 group-hover:scale-105"
+          >
+            <img
+              src="/images/ticodevcr-logo.png"
+              alt="TicoDev CR - Web Development"
+              class="w-24 h-auto"
+              width="96"
+              height="96"
+              loading="lazy"
+            />
+          </div>
+        </a>
+        <a
+          href="https://www.ticodevcr.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs text-white/60 hover:text-white transition-colors"
+        >
+          www.ticodevcr.com
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright Bar -->
+<div class="border-t border-white/20">
+  <div class="container mx-auto px-4 max-w-6xl py-4">
+    <p class="text-xs text-white/60 text-center">
+      {t("footer.copyright", { year })}
+    </p>
+  </div>
+</div>
+</footer>
+
+

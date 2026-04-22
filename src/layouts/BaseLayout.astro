@@ -1,0 +1,78 @@
+---
+/**
+ * BaseLayout.astro
+ *
+ * The root layout for every page. It handles:
+ * - HTML boilerplate with correct lang attribute
+ * - SEO meta tags (title, description, Open Graph)
+ * - hreflang tags for bilingual SEO
+ * - Google Fonts loading
+ * - Global CSS
+ * - Navbar and Footer
+ */
+import Navbar from '@/components/layout/Navbar.astro';
+import EmergencyBanner from '@/components/layout/EmergencyBanner.astro';
+import Footer from '@/components/layout/Footer.astro';
+import ScrollToTop from '@/components/ui/ScrollToTop.astro';
+import '@/styles/global.css';
+import type { Lang } from '@/i18n/utils';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** Canonical URL for this page (optional, defaults to current URL) */
+  canonicalUrl?: string;
+}
+
+const { title, description, lang, canonicalUrl } = Astro.props;
+const canonical = canonicalUrl ?? Astro.url.href;
+
+// Build hreflang URLs
+const enUrl = Astro.url.href.replace('/es/', '/');
+const esUrl = Astro.url.href.includes('/es/') ? Astro.url.href : Astro.url.href.replace(Astro.site?.origin ?? '', (Astro.site?.origin ?? '') + '/es');
+---
+
+<!DOCTYPE html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Bilingual SEO: tells Google about both language versions -->
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+
+    <!-- Open Graph (for social media previews) -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="/images/og-image.jpg" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/images/logo_Loving_Hands.jpg" />
+
+
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <EmergencyBanner lang={lang} />
+    <Navbar lang={lang} />
+
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+    <ScrollToTop />
+  </body>
+</html>
