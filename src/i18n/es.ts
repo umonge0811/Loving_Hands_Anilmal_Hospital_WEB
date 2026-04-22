@@ -7,6 +7,7 @@ export const es = {
   'nav.contact': 'Contacto',
   'nav.book': 'Reservar Cita',
   'nav.lang': 'English',
+  'nav.portal': 'Portal de Clientes',
 
   // ─── Hero Section ──────────────────────────────────────────────
   'hero.title': 'Atención Compasiva para Cada Mascota',

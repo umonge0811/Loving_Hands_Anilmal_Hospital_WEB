@@ -7,6 +7,7 @@ export const en = {
   'nav.contact': 'Contact',
   'nav.book': 'Book Appointment',
   'nav.lang': 'Español',
+  'nav.portal': 'Client Portal',
 
   // ─── Hero Section ──────────────────────────────────────────────
   'hero.title': 'Compassionate Care for Every Pet',
