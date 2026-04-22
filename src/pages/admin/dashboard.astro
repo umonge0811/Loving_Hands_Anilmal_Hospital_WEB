@@ -1,0 +1,171 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const today = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+const stats = [
+  { label: t('admin.dashboard.stat.today'), value: '8', delta: '+2 vs yesterday', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>`, color: 'bg-primary text-white' },
+  { label: t('admin.dashboard.stat.week'), value: '34', delta: 'appointments', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>`, color: 'bg-white text-primary border border-gray-200' },
+  { label: t('admin.dashboard.stat.clients'), value: '142', delta: '+3 this month', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`, color: 'bg-white text-primary border border-gray-200' },
+  { label: t('admin.dashboard.stat.pets'), value: '218', delta: 'registered', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`, color: 'bg-white text-primary border border-gray-200' },
+];
+
+const todaySchedule = [
+  { time: '9:00 AM', client: 'Jane Doe', pet: 'Bella', petIcon: '🐶', service: 'Wellness Exam', status: 'completed' },
+  { time: '10:00 AM', client: 'Carlos Rivera', pet: 'Luna', petIcon: '🐱', service: 'Vaccination', status: 'inprogress' },
+  { time: '11:30 AM', client: 'Maria Lopez', pet: 'Rocky', petIcon: '🐶', service: 'Surgery Consult', status: 'checkedin' },
+  { time: '2:00 PM', client: 'John Smith', pet: 'Coco', petIcon: '🦜', service: 'Dental Cleaning', status: 'scheduled' },
+  { time: '3:30 PM', client: 'Ana Torres', pet: 'Max', petIcon: '🐱', service: 'Holistic Therapy', status: 'scheduled' },
+  { time: '5:00 PM', client: 'David Chen', pet: 'Milo', petIcon: '🐶', service: 'Emergency', status: 'scheduled' },
+];
+
+const statusStyles: Record<string, string> = {
+  scheduled:  'bg-gray-100 text-gray-600',
+  checkedin:  'bg-blue-100 text-blue-700',
+  inprogress: 'bg-amber-100 text-amber-700',
+  completed:  'bg-emerald-100 text-emerald-700',
+  cancelled:  'bg-red-100 text-red-600',
+};
+
+const statusLabels: Record<string, string> = {
+  scheduled:  t('admin.appt.status.scheduled'),
+  checkedin:  t('admin.appt.status.checkedin'),
+  inprogress: t('admin.appt.status.inprogress'),
+  completed:  t('admin.appt.status.completed'),
+  cancelled:  t('admin.appt.status.cancelled'),
+};
+
+const quickActions = [
+  { label: t('admin.dashboard.action.newAppt'), href: '/admin/appointments', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>`, color: 'bg-primary text-white hover:bg-primary-dark' },
+  { label: t('admin.dashboard.action.newClient'), href: '/admin/clients', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>`, color: 'bg-white text-primary border border-gray-200 hover:bg-accent' },
+  { label: t('admin.dashboard.action.newRecord'), href: '/admin/records', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>`, color: 'bg-white text-primary border border-gray-200 hover:bg-accent' },
+  { label: t('admin.dashboard.action.services'), href: '/admin/services', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>`, color: 'bg-white text-primary border border-gray-200 hover:bg-accent' },
+];
+---
+
+<AdminLayout lang={lang} title={t('meta.admin.dashboard.title')} activePage="dashboard">
+  <div class="p-6 md:p-8 max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div class="mb-8">
+      <p class="text-xs font-semibold text-muted uppercase tracking-widest mb-1">{today}</p>
+      <h1 class="font-heading text-2xl md:text-3xl font-bold text-gray-900">
+        {t('admin.dashboard.welcome', { name: 'Dr. Sanchez' })}
+      </h1>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      {stats.map(stat => (
+        <div class={`rounded-2xl p-5 flex items-center gap-4 shadow-sm ${stat.color}`}>
+          <div class="flex-shrink-0 opacity-80" set:html={stat.icon} />
+          <div>
+            <p class="text-2xl font-bold leading-none">{stat.value}</p>
+            <p class="text-xs opacity-75 mt-0.5">{stat.label}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+      <!-- Today's schedule -->
+      <div class="xl:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+          <h2 class="font-heading font-semibold text-gray-900">{t('admin.dashboard.schedule.title')}</h2>
+          <a href="/admin/appointments" class="text-xs font-medium text-primary hover:underline">View All →</a>
+        </div>
+
+        <div class="divide-y divide-gray-50">
+          {todaySchedule.map(appt => (
+            <div class="flex items-center gap-4 px-6 py-3.5 hover:bg-gray-50 transition-colors">
+              <!-- Time -->
+              <div class="w-16 flex-shrink-0 text-right">
+                <p class="text-xs font-bold text-gray-500">{appt.time}</p>
+              </div>
+
+              <!-- Color bar -->
+              <div class={`w-1 h-10 rounded-full flex-shrink-0 ${appt.status === 'completed' ? 'bg-emerald-400' : appt.status === 'inprogress' ? 'bg-amber-400' : appt.status === 'checkedin' ? 'bg-blue-400' : 'bg-gray-200'}`}></div>
+
+              <!-- Info -->
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">{appt.petIcon}</span>
+                  <p class="text-sm font-semibold text-gray-900 truncate">{appt.pet} <span class="font-normal text-muted">· {appt.client}</span></p>
+                </div>
+                <p class="text-xs text-muted">{appt.service}</p>
+              </div>
+
+              <!-- Status + action -->
+              <div class="flex items-center gap-2 flex-shrink-0">
+                <span class={`hidden sm:inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${statusStyles[appt.status]}`}>
+                  {statusLabels[appt.status]}
+                </span>
+                {appt.status === 'scheduled' && (
+                  <button class="text-xs font-semibold text-primary border border-primary rounded-lg px-2.5 py-1 hover:bg-primary hover:text-white transition-colors">
+                    {t('admin.dashboard.schedule.checkin')}
+                  </button>
+                )}
+                {appt.status === 'checkedin' && (
+                  <button class="text-xs font-semibold text-amber-600 border border-amber-300 rounded-lg px-2.5 py-1 hover:bg-amber-50 transition-colors">
+                    Start
+                  </button>
+                )}
+                {appt.status === 'inprogress' && (
+                  <button class="text-xs font-semibold text-emerald-600 border border-emerald-300 rounded-lg px-2.5 py-1 hover:bg-emerald-50 transition-colors">
+                    {t('admin.dashboard.schedule.complete')}
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="space-y-4">
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-100">
+            <h2 class="font-heading font-semibold text-gray-900">{t('admin.dashboard.quickActions')}</h2>
+          </div>
+          <div class="p-4 grid grid-cols-2 gap-3">
+            {quickActions.map(action => (
+              <a href={action.href}
+                 class={`flex flex-col items-center gap-2 p-4 rounded-xl text-center text-xs font-semibold transition-colors shadow-sm ${action.color}`}>
+                <span set:html={action.icon} />
+                {action.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Mini occupancy card -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
+          <h3 class="font-heading font-semibold text-gray-900 text-sm mb-4">Today's Progress</h3>
+          <div class="space-y-3">
+            {[
+              { label: 'Completed', count: 1, total: 6, color: 'bg-emerald-400' },
+              { label: 'In Progress', count: 1, total: 6, color: 'bg-amber-400' },
+              { label: 'Remaining', count: 4, total: 6, color: 'bg-primary' },
+            ].map(item => (
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-muted">{item.label}</span>
+                  <span class="font-semibold text-gray-700">{item.count}/{item.total}</span>
+                </div>
+                <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                  <div class={`h-full rounded-full ${item.color}`} style={`width: ${(item.count / item.total) * 100}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</AdminLayout>

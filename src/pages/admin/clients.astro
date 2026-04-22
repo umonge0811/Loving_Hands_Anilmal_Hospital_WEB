@@ -1,0 +1,155 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const clients = [
+  { id: 1, name: 'Jane Doe',       email: 'jane@email.com',     phone: '(909) 555-0101', pets: ['Bella 🐶', 'Max 🐱', 'Coco 🦜'], lastVisit: 'Apr 22, 2026', totalVisits: 12 },
+  { id: 2, name: 'Carlos Rivera',  email: 'carlos@email.com',   phone: '(909) 555-0102', pets: ['Luna 🐱'],                         lastVisit: 'Apr 22, 2026', totalVisits: 5  },
+  { id: 3, name: 'Maria Lopez',    email: 'maria@email.com',    phone: '(909) 555-0103', pets: ['Rocky 🐶', 'Lola 🐶'],             lastVisit: 'Apr 22, 2026', totalVisits: 8  },
+  { id: 4, name: 'John Smith',     email: 'john@email.com',     phone: '(909) 555-0104', pets: ['Coco 🦜'],                         lastVisit: 'Apr 10, 2026', totalVisits: 3  },
+  { id: 5, name: 'Ana Torres',     email: 'ana@email.com',      phone: '(909) 555-0105', pets: ['Max 🐱', 'Milo 🐶'],               lastVisit: 'Apr 5, 2026',  totalVisits: 7  },
+  { id: 6, name: 'Linda Park',     email: 'linda@email.com',    phone: '(909) 555-0106', pets: ['Tofu 🐹'],                         lastVisit: 'Mar 28, 2026', totalVisits: 2  },
+  { id: 7, name: 'Robert Nguyen',  email: 'robert@email.com',   phone: '(909) 555-0107', pets: ['Bruno 🐶'],                        lastVisit: 'Mar 20, 2026', totalVisits: 9  },
+  { id: 8, name: 'Sofia Reyes',    email: 'sofia@email.com',    phone: '(909) 555-0108', pets: ['Mango 🐱', 'Kiwi 🐱'],            lastVisit: 'Mar 15, 2026', totalVisits: 6  },
+];
+---
+
+<AdminLayout lang={lang} title={t('meta.admin.clients.title')} activePage="clients">
+  <div class="p-6 md:p-8 max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="font-heading text-2xl md:text-3xl font-bold text-gray-900">{t('admin.clients.title')}</h1>
+        <p class="text-muted mt-1">{t('admin.clients.subtitle')}</p>
+      </div>
+      <button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors shadow-sm self-start">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        {t('admin.clients.new')}
+      </button>
+    </div>
+
+    <!-- Search -->
+    <div class="relative mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <input
+        type="search"
+        id="search-input"
+        placeholder={t('admin.clients.search')}
+        class="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors shadow-sm"
+      />
+    </div>
+
+    <!-- Stats strip -->
+    <div class="grid grid-cols-3 gap-3 mb-6">
+      {[
+        { label: 'Total Clients', value: '142' },
+        { label: 'New This Month', value: '8' },
+        { label: 'Active Pets', value: '218' },
+      ].map(s => (
+        <div class="bg-white rounded-xl border border-gray-200 p-4 text-center shadow-sm">
+          <p class="text-xl font-bold text-primary">{s.value}</p>
+          <p class="text-xs text-muted mt-0.5">{s.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Desktop table -->
+    <div class="hidden md:block bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-gray-100 bg-gray-50 text-left">
+            {[t('admin.clients.col.name'), t('admin.clients.col.contact'), t('admin.clients.col.pets'), t('admin.clients.col.lastVisit'), t('admin.clients.col.actions')].map(col => (
+              <th class="text-xs font-semibold text-muted uppercase tracking-wide px-5 py-3">{col}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50" id="clients-table">
+          {clients.map(client => (
+            <tr class="hover:bg-gray-50 transition-colors client-row">
+              <td class="px-5 py-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm flex-shrink-0">
+                    {client.name.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900 client-name">{client.name}</p>
+                    <p class="text-xs text-muted">{client.totalVisits} visits</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-5 py-4">
+                <p class="text-sm text-gray-700">{client.email}</p>
+                <p class="text-xs text-muted">{client.phone}</p>
+              </td>
+              <td class="px-5 py-4">
+                <div class="flex flex-wrap gap-1">
+                  {client.pets.map(pet => (
+                    <span class="inline-flex items-center bg-accent text-primary text-xs font-medium px-2 py-0.5 rounded-full">{pet}</span>
+                  ))}
+                </div>
+              </td>
+              <td class="px-5 py-4 text-sm text-gray-600">{client.lastVisit}</td>
+              <td class="px-5 py-4">
+                <div class="flex items-center gap-3">
+                  <button class="text-xs font-semibold text-primary hover:underline">{t('admin.clients.action.view')}</button>
+                  <button class="text-xs font-semibold text-secondary hover:underline">{t('admin.clients.action.book')}</button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile cards -->
+    <div class="md:hidden space-y-3" id="clients-mobile">
+      {clients.map(client => (
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 client-row">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm flex-shrink-0">
+              {client.name.split(' ').map(n => n[0]).join('')}
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-semibold text-gray-900 text-sm client-name">{client.name}</p>
+              <p class="text-xs text-muted">{client.email}</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-1 mb-3">
+            {client.pets.map(pet => (
+              <span class="inline-flex items-center bg-accent text-primary text-xs font-medium px-2 py-0.5 rounded-full">{pet}</span>
+            ))}
+          </div>
+          <div class="flex items-center justify-between text-xs text-muted border-t border-gray-100 pt-3">
+            <span>Last visit: {client.lastVisit}</span>
+            <div class="flex gap-3">
+              <button class="font-semibold text-primary">{t('admin.clients.action.view')}</button>
+              <button class="font-semibold text-secondary">{t('admin.clients.action.book')}</button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</AdminLayout>
+
+<script>
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const rows = document.querySelectorAll<HTMLElement>('.client-row');
+
+  searchInput?.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    rows.forEach(row => {
+      const name = row.querySelector('.client-name')?.textContent?.toLowerCase() ?? '';
+      row.style.display = name.includes(query) ? '' : 'none';
+    });
+  });
+</script>

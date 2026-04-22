@@ -1,0 +1,167 @@
+---
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const appointments = [
+  { id: 1, date: 'Apr 22, 2026', time: '9:00 AM',  client: 'Jane Doe',      pet: 'Bella',  petIcon: '🐶', service: 'Wellness Exam',      vet: 'Dr. Sanchez', status: 'completed' },
+  { id: 2, date: 'Apr 22, 2026', time: '10:00 AM', client: 'Carlos Rivera',  pet: 'Luna',   petIcon: '🐱', service: 'Vaccination',          vet: 'Dr. Sanchez', status: 'inprogress' },
+  { id: 3, date: 'Apr 22, 2026', time: '11:30 AM', client: 'Maria Lopez',    pet: 'Rocky',  petIcon: '🐶', service: 'Surgery Consult',      vet: 'Dr. Sanchez', status: 'checkedin' },
+  { id: 4, date: 'Apr 22, 2026', time: '2:00 PM',  client: 'John Smith',     pet: 'Coco',   petIcon: '🦜', service: 'Dental Cleaning',      vet: 'Dr. Sanchez', status: 'scheduled' },
+  { id: 5, date: 'Apr 22, 2026', time: '3:30 PM',  client: 'Ana Torres',     pet: 'Max',    petIcon: '🐱', service: 'Holistic Therapy',     vet: 'Dr. Sanchez', status: 'scheduled' },
+  { id: 6, date: 'Apr 23, 2026', time: '9:00 AM',  client: 'Linda Park',     pet: 'Tofu',   petIcon: '🐹', service: 'Exotic Animal Exam',   vet: 'Dr. Sanchez', status: 'scheduled' },
+  { id: 7, date: 'Apr 23, 2026', time: '11:00 AM', client: 'Robert Nguyen',  pet: 'Bruno',  petIcon: '🐶', service: 'Post-Surgery Follow',  vet: 'Dr. Sanchez', status: 'scheduled' },
+  { id: 8, date: 'Apr 20, 2026', time: '10:00 AM', client: 'Sofia Reyes',    pet: 'Mango',  petIcon: '🐱', service: 'Wellness Exam',        vet: 'Dr. Sanchez', status: 'completed' },
+  { id: 9, date: 'Apr 18, 2026', time: '2:30 PM',  client: 'Kevin White',    pet: 'Zeus',   petIcon: '🐶', service: 'Emergency',            vet: 'Dr. Sanchez', status: 'cancelled' },
+];
+
+const statusStyles: Record<string, string> = {
+  scheduled:  'bg-gray-100 text-gray-600',
+  checkedin:  'bg-blue-100 text-blue-700',
+  inprogress: 'bg-amber-100 text-amber-700',
+  completed:  'bg-emerald-100 text-emerald-700',
+  cancelled:  'bg-red-100 text-red-600',
+};
+
+const statusLabels: Record<string, string> = {
+  scheduled:  t('admin.appt.status.scheduled'),
+  checkedin:  t('admin.appt.status.checkedin'),
+  inprogress: t('admin.appt.status.inprogress'),
+  completed:  t('admin.appt.status.completed'),
+  cancelled:  t('admin.appt.status.cancelled'),
+};
+---
+
+<AdminLayout lang={lang} title={t('meta.admin.appointments.title')} activePage="appointments">
+  <div class="p-6 md:p-8 max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="font-heading text-2xl md:text-3xl font-bold text-gray-900">{t('admin.appt.title')}</h1>
+        <p class="text-muted mt-1">{t('admin.appt.subtitle')}</p>
+      </div>
+      <button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors shadow-sm self-start">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        {t('admin.appt.new')}
+      </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      {(['all','today','upcoming','past'] as const).map((f, i) => (
+        <button data-filter={f}
+          class={`px-4 py-2 rounded-xl text-sm font-medium transition-colors filter-btn ${i === 0 ? 'bg-primary text-white' : 'bg-white text-muted border border-gray-200 hover:text-primary hover:border-primary'}`}>
+          {f === 'all' ? t('admin.appt.filter.all') : f === 'today' ? t('admin.appt.filter.today') : f === 'upcoming' ? t('admin.appt.filter.upcoming') : t('admin.appt.filter.past')}
+        </button>
+      ))}
+    </div>
+
+    <!-- Desktop table -->
+    <div class="hidden md:block bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-gray-100 bg-gray-50 text-left">
+            {[t('admin.appt.col.datetime'), t('admin.appt.col.client'), t('admin.appt.col.pet'), t('admin.appt.col.service'), t('admin.appt.col.vet'), t('admin.appt.col.status'), t('admin.appt.col.actions')].map(col => (
+              <th class="text-xs font-semibold text-muted uppercase tracking-wide px-5 py-3">{col}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          {appointments.map(appt => (
+            <tr class="hover:bg-gray-50 transition-colors appt-row" data-status={appt.status} data-date={appt.date}>
+              <td class="px-5 py-3.5">
+                <p class="text-sm font-medium text-gray-900">{appt.date}</p>
+                <p class="text-xs text-muted">{appt.time}</p>
+              </td>
+              <td class="px-5 py-3.5 text-sm font-medium text-gray-800">{appt.client}</td>
+              <td class="px-5 py-3.5">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-lg">{appt.petIcon}</span>
+                  <span class="text-sm text-gray-700">{appt.pet}</span>
+                </div>
+              </td>
+              <td class="px-5 py-3.5 text-sm text-gray-600">{appt.service}</td>
+              <td class="px-5 py-3.5 text-sm text-gray-600">{appt.vet}</td>
+              <td class="px-5 py-3.5">
+                <span class={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold ${statusStyles[appt.status]}`}>
+                  {statusLabels[appt.status]}
+                </span>
+              </td>
+              <td class="px-5 py-3.5">
+                <div class="flex items-center gap-2">
+                  {appt.status === 'scheduled' && <button class="text-xs text-primary font-medium hover:underline">{t('admin.appt.action.checkin')}</button>}
+                  {appt.status === 'checkedin' && <button class="text-xs text-amber-600 font-medium hover:underline">Start</button>}
+                  {appt.status === 'inprogress' && <button class="text-xs text-emerald-600 font-medium hover:underline">{t('admin.appt.action.complete')}</button>}
+                  {(appt.status === 'completed') && <button class="text-xs text-primary font-medium hover:underline">{t('admin.appt.action.record')}</button>}
+                  {(appt.status === 'scheduled' || appt.status === 'checkedin') && <button class="text-xs text-red-500 font-medium hover:underline">{t('admin.appt.action.cancel')}</button>}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile cards -->
+    <div class="md:hidden space-y-3">
+      {appointments.map(appt => (
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 appt-row" data-status={appt.status}>
+          <div class="flex items-start justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">{appt.petIcon}</span>
+              <div>
+                <p class="font-semibold text-gray-900 text-sm">{appt.pet} <span class="font-normal text-muted">· {appt.client}</span></p>
+                <p class="text-xs text-muted">{appt.service}</p>
+              </div>
+            </div>
+            <span class={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${statusStyles[appt.status]}`}>
+              {statusLabels[appt.status]}
+            </span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-muted border-t border-gray-100 pt-3">
+            <span>{appt.date} · {appt.time}</span>
+            <div class="flex gap-3">
+              {appt.status === 'scheduled' && <button class="font-medium text-primary">{t('admin.appt.action.checkin')}</button>}
+              {appt.status === 'inprogress' && <button class="font-medium text-emerald-600">{t('admin.appt.action.complete')}</button>}
+              {appt.status === 'completed' && <button class="font-medium text-primary">{t('admin.appt.action.record')}</button>}
+              {(appt.status === 'scheduled' || appt.status === 'checkedin') && <button class="font-medium text-red-500">{t('admin.appt.action.cancel')}</button>}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</AdminLayout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const rows = document.querySelectorAll<HTMLElement>('.appt-row');
+  const today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  const filterMap: Record<string, string[]> = {
+    all: ['scheduled','checkedin','inprogress','completed','cancelled'],
+    today: ['scheduled','checkedin','inprogress','completed','cancelled'],
+    upcoming: ['scheduled'],
+    past: ['completed','cancelled'],
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const filter = tab.dataset.filter ?? 'all';
+      tabs.forEach(t => { t.classList.remove('bg-primary','text-white'); t.classList.add('bg-white','text-muted','border','border-gray-200'); });
+      tab.classList.add('bg-primary','text-white');
+      tab.classList.remove('bg-white','text-muted','border','border-gray-200');
+      const allowed = filterMap[filter];
+      rows.forEach(row => {
+        const show = allowed.includes(row.dataset.status ?? '');
+        row.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>

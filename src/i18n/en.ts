@@ -106,6 +106,97 @@ export const en = {
 
 
 
+  // ─── Admin / Backoffice — Navigation ──────────────────────────
+  'admin.nav.dashboard': 'Dashboard',
+  'admin.nav.appointments': 'Appointments',
+  'admin.nav.clients': 'Clients',
+  'admin.nav.records': 'Medical Records',
+  'admin.nav.services': 'Services',
+  'admin.nav.staff': 'Staff',
+  'admin.nav.logout': 'Sign Out',
+  'admin.nav.backToSite': 'Back to Website',
+  'admin.nav.role.admin': 'Administrator',
+  'admin.nav.role.vet': 'Veterinarian',
+  'admin.nav.role.staff': 'Staff',
+
+  // ─── Admin — Login ─────────────────────────────────────────────
+  'admin.login.title': 'Hospital Admin',
+  'admin.login.subtitle': 'Staff access only — sign in with your hospital credentials',
+  'admin.login.email': 'Work Email',
+  'admin.login.password': 'Password',
+  'admin.login.submit': 'Sign In',
+  'admin.login.sso': 'Sign in with Hospital SSO',
+  'admin.login.or': 'or',
+  'admin.login.forgot': 'Forgot password?',
+  'admin.login.demo': 'Demo mode — hospital staff access',
+
+  // ─── Admin — Dashboard ─────────────────────────────────────────
+  'admin.dashboard.welcome': 'Good morning, {name}',
+  'admin.dashboard.date': 'Today\'s Schedule',
+  'admin.dashboard.stat.today': 'Appointments Today',
+  'admin.dashboard.stat.week': 'This Week',
+  'admin.dashboard.stat.clients': 'Total Clients',
+  'admin.dashboard.stat.pets': 'Total Pets',
+  'admin.dashboard.schedule.title': 'Today\'s Appointments',
+  'admin.dashboard.schedule.empty': 'No appointments scheduled for today.',
+  'admin.dashboard.schedule.checkin': 'Check In',
+  'admin.dashboard.schedule.complete': 'Complete',
+  'admin.dashboard.upcoming.title': 'Next 7 Days',
+  'admin.dashboard.quickActions': 'Quick Actions',
+  'admin.dashboard.action.newAppt': 'New Appointment',
+  'admin.dashboard.action.newClient': 'Add Client',
+  'admin.dashboard.action.newRecord': 'Add Record',
+  'admin.dashboard.action.services': 'Manage Services',
+
+  // ─── Admin — Appointments ──────────────────────────────────────
+  'admin.appt.title': 'All Appointments',
+  'admin.appt.subtitle': 'View and manage all hospital appointments.',
+  'admin.appt.new': 'New Appointment',
+  'admin.appt.filter.all': 'All',
+  'admin.appt.filter.today': 'Today',
+  'admin.appt.filter.upcoming': 'Upcoming',
+  'admin.appt.filter.past': 'Past',
+  'admin.appt.col.datetime': 'Date & Time',
+  'admin.appt.col.client': 'Client',
+  'admin.appt.col.pet': 'Pet',
+  'admin.appt.col.service': 'Service',
+  'admin.appt.col.vet': 'Vet',
+  'admin.appt.col.status': 'Status',
+  'admin.appt.col.actions': 'Actions',
+  'admin.appt.status.scheduled': 'Scheduled',
+  'admin.appt.status.checkedin': 'Checked In',
+  'admin.appt.status.inprogress': 'In Progress',
+  'admin.appt.status.completed': 'Completed',
+  'admin.appt.status.cancelled': 'Cancelled',
+  'admin.appt.action.checkin': 'Check In',
+  'admin.appt.action.complete': 'Complete',
+  'admin.appt.action.cancel': 'Cancel',
+  'admin.appt.action.record': 'Add Record',
+  'admin.appt.empty': 'No appointments found.',
+
+  // ─── Admin — Clients ───────────────────────────────────────────
+  'admin.clients.title': 'Clients',
+  'admin.clients.subtitle': 'Manage all registered clients and their pets.',
+  'admin.clients.new': 'Add Client',
+  'admin.clients.search': 'Search clients...',
+  'admin.clients.col.name': 'Name',
+  'admin.clients.col.contact': 'Contact',
+  'admin.clients.col.pets': 'Pets',
+  'admin.clients.col.lastVisit': 'Last Visit',
+  'admin.clients.col.actions': 'Actions',
+  'admin.clients.action.view': 'View',
+  'admin.clients.action.book': 'Book Appt',
+  'admin.clients.empty': 'No clients found.',
+
+  // ─── Admin — SEO ───────────────────────────────────────────────
+  'meta.admin.login.title': 'Staff Login | Loving Hands Animal Hospital',
+  'meta.admin.dashboard.title': 'Dashboard | Hospital Admin',
+  'meta.admin.appointments.title': 'Appointments | Hospital Admin',
+  'meta.admin.clients.title': 'Clients | Hospital Admin',
+
+  // ─── Main site — Portal CTA ────────────────────────────────────
+  'nav.admin': 'Staff Access',
+
   // ─── Client Portal — Navigation ───────────────────────────────
   'portal.nav.dashboard': 'Dashboard',
   'portal.nav.pets': 'My Pets',
