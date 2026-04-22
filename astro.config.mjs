@@ -5,6 +5,10 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://lovinghandsanimalhospital.com',
+  server: {
+    host: true,   // expone en 0.0.0.0 → accesible desde el celular por WiFi
+    port: 4321,
+  },
   image: {
     service: {
       entrypoint: 'astro/assets/services/sharp',
