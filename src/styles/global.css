@@ -1,0 +1,48 @@
+/* Google Fonts — must be first, before @tailwind directives */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-gray-900 bg-white antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-4 max-w-6xl;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg
+           bg-primary text-white font-semibold text-sm
+           hover:bg-primary-dark transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg
+           border-2 border-primary text-primary font-semibold text-sm
+           hover:bg-primary hover:text-white transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .section-title {
+    @apply font-heading text-3xl md:text-4xl font-bold text-primary text-center;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-muted text-center max-w-2xl mx-auto mt-4;
+  }
+}

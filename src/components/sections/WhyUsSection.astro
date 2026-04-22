@@ -1,0 +1,61 @@
+---
+import { useTranslations } from '@/i18n/utils';
+import type { Lang } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const reasons = [
+  {
+    key: 'hours' as const,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+  },
+  {
+    key: 'holistic' as const,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>`,
+  },
+  {
+    key: 'emergency' as const,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" /></svg>`,
+  },
+  {
+    key: 'quality' as const,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.745 3.745 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.745 3.745 0 013.296-1.043A3.745 3.745 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.745 3.745 0 013.296 1.043 3.745 3.745 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>`,
+  },
+] as const;
+---
+
+<section class="py-16 md:py-24 bg-primary text-white">
+  <div class="container mx-auto px-4 max-w-6xl">
+
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-white text-center">
+        {t('why.title')}
+      </h2>
+    </div>
+
+    <!-- Reasons Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {reasons.map(({ key, icon }) => (
+        <div class="flex flex-col gap-4 p-6 rounded-2xl bg-white/10 hover:bg-white/20 transition-all duration-300 backdrop-blur-md border border-white/10">
+
+          <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white" aria-hidden="true">
+            <Fragment set:html={icon} />
+          </div>
+          <h3 class="font-heading font-bold text-lg text-white">
+            {t(`why.${key}.title`)}
+          </h3>
+          <p class="text-sm text-white/80 leading-relaxed">
+            {t(`why.${key}.description`)}
+          </p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

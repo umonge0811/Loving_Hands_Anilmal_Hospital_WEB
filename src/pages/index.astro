@@ -1,0 +1,35 @@
+---
+/**
+ * English Home Page (default locale — no /en/ prefix)
+ *
+ * Astro's i18n routing is configured with prefixDefaultLocale: false,
+ * so the English version lives at / instead of /en/
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroSection from '@/components/sections/HeroSection.astro';
+import ServicesSection from '@/components/sections/ServicesSection.astro';
+import WhyUsSection from '@/components/sections/WhyUsSection.astro';
+import TeamSection from '@/components/sections/TeamSection.astro';
+import ContactSection from '@/components/sections/ContactSection.astro';
+import TestimonialsSection from '@/components/sections/TestimonialsSection.astro';
+import GallerySection from '@/components/sections/GallerySection.astro';
+
+import { useTranslations } from '@/i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t('meta.home.title')}
+  description={t('meta.home.description')}
+>
+  <HeroSection lang={lang} />
+  <ServicesSection lang={lang} />
+  <WhyUsSection lang={lang} />
+  <TeamSection lang={lang} />
+  <TestimonialsSection lang={lang} />
+  <GallerySection lang={lang} />
+  <ContactSection lang={lang} />
+</BaseLayout>
